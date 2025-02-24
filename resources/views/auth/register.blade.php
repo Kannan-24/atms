@@ -79,6 +79,17 @@
                         </div>
                     </div>
 
+                    <!-- Phone Number -->
+                    <div>
+                        <label class="block mb-2 text-sm text-gray-800">Phone Number</label>
+                        <div class="relative flex items-center">
+                            <input id="phone" name="phone" type="tel" required
+                                class="w-full py-3 pl-4 pr-10 text-sm text-gray-800 border border-gray-300 rounded-lg outline-blue-600"
+                                placeholder="Enter your phone number" value="{{ old('phone') }}" autocomplete="tel" />
+                            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+                        </div>
+                    </div>
+                    
                     <!-- Password -->
                     <div>
                         <label class="block mb-2 text-sm text-gray-800">Password</label>

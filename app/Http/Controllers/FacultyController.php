@@ -3,58 +3,69 @@
 namespace App\Http\Controllers;
 
 use App\Models\Faculty;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Department;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class FacultyController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the faculty.
      */
     public function index()
     {
-        $faculty = Faculty::all();
+        $faculty = Faculty::with('user', 'department')->paginate(10); 
         return view('faculty.index', compact('faculty'));
+
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new faculty.
      */
     public function create()
     {
-        return view('faculty.create');
+        $departments = Department::all();
+        return view('faculty.create', compact('departments'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created faculty in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'employee_id' => 'required',
-            'email' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'ts_id' => 'required|string|max:50|unique:faculty,ts_id',
+            'dob' => 'required|date',
+            'blood_group' => 'required|string',
+            'address' => 'required|string',
+            'dept_id' => 'required|integer|exists:departments,id',
         ]);
 
+        // Create user account
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make('password'),
+            'password' => Hash::make('defaultpassword'), // Set a default password or generate one
         ]);
 
+        // Create faculty record
         Faculty::create([
-            'name' => $request->name,
-            'employee_id' => $request->employee_id,
             'user_id' => $user->id,
+            'ts_id' => $request->ts_id,
+            'dob' => $request->dob,
+            'blood_group' => $request->blood_group,
+            'address' => $request->address,
+            'dept_id' => $request->dept_id,
         ]);
 
-        return redirect()->route('faculty.index')
-            ->with('success', 'Faculty created successfully.');
+        return redirect()->route('faculty.index')->with('success', 'Faculty added successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Show the details of a specific faculty.
      */
     public function show(Faculty $faculty)
     {
@@ -62,46 +73,56 @@ class FacultyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing a faculty.
      */
     public function edit(Faculty $faculty)
     {
-        return view('faculty.edit', compact('faculty'));
+        $departments = Department::all();
+        return view('faculty.edit', compact('faculty', 'departments'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a faculty's details.
      */
     public function update(Request $request, Faculty $faculty)
     {
         $request->validate([
-            'name' => 'required',
-            'employee_id' => 'required',
-            'email' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $faculty->user_id,
+            'phone' => 'required|string',
+            'ts_id' => 'required|string|max:50|unique:faculty,ts_id,' . $faculty->id,
+            'dob' => 'required|date',
+            'blood_group' => 'required|string',
+            'address' => 'required|string',
+            'dept_id' => 'required|integer|exists:departments,id',
         ]);
 
+        // Update user account
         $faculty->user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
         ]);
 
+        // Update faculty record
         $faculty->update([
-            'name' => $request->name,
-            'employee_id' => $request->employee_id,
+            'ts_id' => $request->ts_id,
+            'dob' => $request->dob,
+            'blood_group' => $request->blood_group,
+            'address' => $request->address,
+            'dept_id' => $request->dept_id,
         ]);
 
-        return redirect()->route('faculty.index')
-            ->with('success', 'Faculty updated successfully');
+        return redirect()->route('faculty.index')->with('success', 'Faculty updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove a faculty from the system.
      */
     public function destroy(Faculty $faculty)
     {
         $faculty->user->delete();
         $faculty->delete();
-        return redirect()->route('faculty.index')
-            ->with('success', 'Faculty deleted successfully');
+        return redirect()->route('faculty.index')->with('success', 'Faculty deleted successfully.');
     }
 }

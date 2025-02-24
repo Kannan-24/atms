@@ -8,7 +8,7 @@
     <div class="py-6 mt-20 ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-            < x-bread-crumb-navigation />
+            <x-bread-crumb-navigation />
 
             <div class="overflow-hidden bg-white rounded-lg shadow-xl">
                 <div class="p-6 overflow-x-auto">
@@ -17,9 +17,8 @@
                             <tr class="text-sm text-gray-600 bg-indigo-100">
                                 <th class="px-6 py-4 border-b-2 border-gray-200">#</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Bus Number</th>
-                                <th class="px-6 py-4 border-b-2 border-gray-200">Driver Name</th>
-                                <th class="px-6 py-4 border-b-2 border-gray-200">Driver Phone</th>
-                                <th class="px-6 py-4 border-b-2 border-gray-200">Starting Point</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Number Plate</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Number of Seats</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Actions</th>
                             </tr>
                         </thead>
@@ -27,17 +26,14 @@
                             @foreach ($buses as $bus)
                                 <tr class="border-b hover:bg-indigo-50">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $bus->bus_number }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $bus->driver ? $bus->driver->name : '' }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $bus->driver ? $bus->driver->phone : '' }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $bus->starting_point }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $bus->number }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $bus->number_plate }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $bus->no_of_seats }}</td>
                                     <x-action-buttons model="buses" :id="$bus->id" />
-                                </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <x-pagination :paginator="$buses" />
                 </div>
             </div>
         </div>

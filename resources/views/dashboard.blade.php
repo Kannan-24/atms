@@ -15,6 +15,95 @@
 
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <!-- Departments Card -->
+                <a href="{{ route('departments.index') }}"
+                    class="block h-full transition-all duration-200 bg-white border border-gray-200 rounded group hover:shadow-lg hover:border-purple-500 hover:ring-1 hover:ring-purple-500/20">
+                    <div class="flex items-center p-6">
+                        <div
+                            class="flex items-center justify-center flex-shrink-0 w-16 h-16 transition-colors duration-200 rounded bg-purple-50 group-hover:bg-purple-100">
+                            <span class="text-4xl" role="img" aria-label="Departments">🏢</span>
+                        </div>
+
+                        <div class="flex-grow ml-6">
+                            <h3
+                                class="text-lg font-semibold text-gray-900 transition-colors duration-200 line-clamp-1 group-hover:text-purple-600">
+                                Departments
+                            </h3>
+                            <div class="inline-flex items-center mt-1">
+                                <span class="text-gray-600 rounded">{{ $departmentCount }} departments</span>
+                            </div>
+                        </div>
+
+                        <div class="flex-shrink-0 ml-4">
+                            <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-purple-500"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Batches Card -->
+                <a href="{{ route('batches.index') }}"
+                    class="block h-full transition-all duration-200 bg-white border border-gray-200 rounded group hover:shadow-lg hover:border-teal-500 hover:ring-1 hover:ring-teal-500/20">
+                    <div class="flex items-center p-6">
+                        <div
+                            class="flex items-center justify-center flex-shrink-0 w-16 h-16 transition-colors duration-200 rounded bg-teal-50 group-hover:bg-teal-100">
+                            <span class="text-4xl" role="img" aria-label="Batches">📅</span>
+                        </div>
+
+                        <div class="flex-grow ml-6">
+                            <h3
+                                class="text-lg font-semibold text-gray-900 transition-colors duration-200 line-clamp-1 group-hover:text-teal-600">
+                                Batches
+                            </h3>
+                            <div class="inline-flex items-center mt-1">
+                                <span class="text-gray-600 rounded">{{ $batchCount }} batches</span>
+                            </div>
+                        </div>
+
+                        <div class="flex-shrink-0 ml-4">
+                            <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-teal-500"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Classes Card -->
+                <a href="{{ route('classes.index') }}"
+                    class="block h-full transition-all duration-200 bg-white border border-gray-200 rounded group hover:shadow-lg hover:border-pink-500 hover:ring-1 hover:ring-pink-500/20">
+                    <div class="flex items-center p-6">
+                        <div
+                            class="flex items-center justify-center flex-shrink-0 w-16 h-16 transition-colors duration-200 rounded bg-pink-50 group-hover:bg-pink-100">
+                            <span class="text-4xl" role="img" aria-label="Classes">🏫</span>
+                        </div>
+
+                        <div class="flex-grow ml-6">
+                            <h3
+                                class="text-lg font-semibold text-gray-900 transition-colors duration-200 line-clamp-1 group-hover:text-pink-600">
+                                Classes
+                            </h3>
+                            <div class="inline-flex items-center mt-1">
+                                <span class="text-gray-600 rounded">{{ $classCount }} classes</span>
+                            </div>
+                        </div>
+
+                        <div class="flex-shrink-0 ml-4">
+                            <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-pink-500"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
                 <!-- Students Card -->
                 <a href="{{ route('students.index') }}"
                     class="block h-full transition-all duration-200 bg-white border border-gray-200 rounded group hover:shadow-lg hover:border-blue-500 hover:ring-1 hover:ring-blue-500/20">
@@ -66,8 +155,8 @@
 
                         <div class="flex-shrink-0 ml-4">
                             <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-green-500"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
                                 </path>
                             </svg>
@@ -96,8 +185,8 @@
 
                         <div class="flex-shrink-0 ml-4">
                             <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-yellow-500"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
                                 </path>
                             </svg>
@@ -126,8 +215,39 @@
 
                         <div class="flex-shrink-0 ml-4">
                             <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-red-500"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                {{-- parent --}}
+                <a href="{{ route('parents.index') }}"
+                    class="block h-full transition-all duration-200 bg-white border border-gray-200 rounded group hover:shadow-lg hover:border-yellow-500 hover:ring-1 hover:ring-yellow-500/20">
+                    <div class="flex items
+                    -center p-6">
+                        <div
+                            class="flex items-center justify-center flex-shrink-0 w-16 h-16 transition-colors duration-200 rounded bg-yellow-50 group-hover:bg-yellow-100">
+                            <span class="text-4xl" role="img" aria-label="Parents">👨‍👩‍👧‍👦</span>
+                        </div>
+
+                        <div class="flex-grow ml-6">
+                            <h3
+                                class="text-lg font-semibold text-gray-900 transition-colors duration-200 line-clamp-1 group-hover:text-yellow-600">
+                                Parents
+                            </h3>
+                            <div class="inline-flex items-center mt-1">
+                                <span class="text-gray-600 rounded">{{ $parentCount }} parents</span>
+                            </div>
+                        </div>
+
+                        <div class="flex-shrink-0 ml-4">
+                            <svg class="w-5 h-5 text-gray-400 transition-colors duration-200 group-hover:text-yellow-500"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
                                 </path>
                             </svg>
@@ -135,43 +255,6 @@
                     </div>
                 </a>
             </div>
-
-
-
-            <!-- Graph Section -->
-            <div class="p-6 mt-8 bg-white rounded-lg shadow-lg">
-                <h2 class="text-xl font-semibold text-gray-800">Statistics Overview 📊</h2>
-                <div id="chart" class="mt-4"></div>
-            </div>
         </div>
     </div>
-
-    <!-- Include ApexCharts -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var options = {
-                chart: {
-                    type: 'bar',
-                    height: 350
-                },
-                series: [{
-                    name: 'Count',
-                    data: [
-                        {{ json_decode($chartData)->students }},
-                        {{ json_decode($chartData)->faculty }},
-                        {{ json_decode($chartData)->buses }},
-                        {{ json_decode($chartData)->drivers }}
-                    ]
-                }],
-                xaxis: {
-                    categories: ['Students', 'Faculty', 'Buses', 'Drivers']
-                },
-                colors: ['#1E40AF', '#10B981', '#F59E0B', '#EF4444']
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
-        });
-    </script>
 </x-app-layout>

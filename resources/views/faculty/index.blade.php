@@ -18,6 +18,7 @@
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Name</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Email</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Employee ID</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Department</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Actions</th>
                             </tr>
                         </thead>
@@ -25,14 +26,17 @@
                             @foreach ($faculty as $member)
                                 <tr class="border-b hover:bg-indigo-50">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $member->name }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $member->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $member->user->email }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $member->employee_id }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $member->ts_id }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $member->department->dept_code }}
+                                    </td>
                                     <x-action-buttons model="faculty" :id="$member->id" />
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <x-pagination :paginator="$faculty" />
                 </div>
             </div>
         </div>

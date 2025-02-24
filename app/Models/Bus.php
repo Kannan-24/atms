@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
-    protected $fillable = ['bus_number', 'starting_point' ];
-    public function driver()
-    {
-        return $this->hasOneThrough(Driver::class, BusDriver::class, 'bus_id', 'id', 'id', 'driver_id');
-    }
+    protected $fillable = [
+        'number',
+        'number_plate',
+        'no_of_seats',
+    ];
 }

@@ -45,9 +45,6 @@ class ProfileController extends Controller
             'dob' => 'nullable|date',
         ]);
 
-        $user = Auth::user();
-        $user->update($request->all());
-
         return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
     }
 

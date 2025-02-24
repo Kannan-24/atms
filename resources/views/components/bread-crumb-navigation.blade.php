@@ -1,6 +1,5 @@
 <div class="mb-6">
-    <nav class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md"
-        aria-label="Breadcrumb">
+    <nav class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-2">
             <li>
                 <a href="{{ route('dashboard') }}" class="font-medium text-blue-800 hover:text-blue-900">
@@ -34,12 +33,18 @@
             @endforeach
         </ol>
 
-        <!-- Show "Create" Button Only on Index Pages -->
+        <!-- Show "Create" and "Import" Buttons Only on Index Pages -->
         @if (count($segments) == 1 && !in_array($lastSegment, ['profile', 'account-settings']))
-            <a href="{{ url($url . '/create') }}"
-                class="px-5 py-2 ml-4 text-sm text-white transition duration-300 bg-green-600 rounded-lg shadow-md hover:bg-green-700">
-                Create {{ ucfirst(str_replace('-', ' ', $lastSegment)) }}
-            </a>
+            <div class="flex space-x-2">
+                <a href="{{ url($url . '/create') }}"
+                    class="px-5 py-2 text-sm text-white transition duration-300 bg-green-600 rounded-lg shadow-md hover:bg-green-700">
+                    Create {{ ucfirst(str_replace('-', ' ', $lastSegment)) }}
+                </a>
+                <a href="{{ url($url . '/import') }}"
+                    class="px-5 py-2 text-sm text-white transition duration-300 bg-blue-600 rounded-lg shadow-md hover:bg-blue-700">
+                    Import {{ ucfirst(str_replace('-', ' ', $lastSegment)) }}
+                </a>
+            </div>
         @endif
 
     </nav>

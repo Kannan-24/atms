@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('attendance', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->timestamp('check_in');
+            $table->integer('check_in_stop_id');
+            $table->geometry('check_in_gps');
+            $table->timestamp('check_out')->nullable();
+            $table->integer('check_out_stop_id')->nullable();
+            $table->geometry('check_out_gps')->nullable();
+            $table->boolean('towards_college');
+            $table->enum('status', ['Present', 'Absent']);
+            $table->integer('bus_id');
+            $table->integer('route_id');
+            $table->float('distance_traveled');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('attendance');
+    }
+};

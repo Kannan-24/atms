@@ -8,6 +8,15 @@ use App\Http\Controllers\BusController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\BusRouteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ParentsController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\BatchesController;
+use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RouteController;
+use App\Http\Controllers\StopController;
+use App\Http\Controllers\UserstopController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,14 +41,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/account-settings/delete', [AccountSettingsController::class, 'destroy'])->name('account.destroy');
 });
 
-// Resource Routes for Admin Management
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('batches', BatchesController::class);
+    Route::resource('classes', ClassesController::class);
+    Route::resource('departments', DepartmentController::class);
     Route::resource('students', StudentController::class);
     Route::resource('faculty', FacultyController::class);
+    Route::resource('parents', ParentsController::class);
     Route::resource('buses', BusController::class);
     Route::resource('drivers', DriverController::class);
-    Route::resource('busRoutes', BusRouteController::class);
+    Route::resource('busroutes', RouteController::class);
+    Route::resource('stops', StopController::class);
+    Route::resource('userstops', UserstopController::class);
+    Route::post('/faculty/import', [FacultyController::class, 'import'])->name('faculty.import');
+
 });
 
+
+
+
+
+
 // Include Authentication Routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

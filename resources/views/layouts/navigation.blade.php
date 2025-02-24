@@ -95,29 +95,56 @@
                 <li>
                     <a href="{{ route('dashboard') }}"
                         class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
-    {{ request()->routeIs('dashboard') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                    {{ request()->routeIs('dashboard') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
                         <span class="ml-3">Dashboard</span>
                     </a>
-
                 </li>
+                <li>
+                    <a href="{{ route('departments.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                    {{ request()->routeIs('departmentss.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Department</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('batches.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                    {{ request()->routeIs('batches.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Batches</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('classes.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                    {{ request()->routeIs('classes.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Classes</span>
+                    </a>
                 <li>
                     <a href="{{ route('students.index') }}"
                         class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
-    {{ request()->routeIs('students.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                    {{ request()->routeIs('students.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
                         <span class="ml-3">Students</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('faculty.index') }}"
                         class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
-    {{ request()->routeIs('faculty.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                    {{ request()->routeIs('faculty.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
                         <span class="ml-3">Faculty</span>
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('parents.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                    {{ request()->routeIs('parents.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Parents</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{ route('buses.index') }}"
                         class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
-    {{ request()->routeIs('buses.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                    {{ request()->routeIs('buses.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
                         <span class="ml-3">Buses</span>
                     </a>
                 </li>
@@ -129,12 +156,41 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('busRoutes.index') }}"
+                    <a href="{{ route('busroutes.index') }}"
                         class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
     {{ request()->routeIs('busRoutes.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
                         <span class="ml-3">Bus Routes</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('stops.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                    {{ request()->routeIs('stops.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Stops</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('userstops.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                    {{ request()->routeIs('userstops.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">User Stops</span>
+                    </a>
+                </li>
+                {{--  
+                <li>
+                    <a href="{{ route('parents.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                {{ request()->routeIs('parents.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Parents</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('attendance.index') }}"
+                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
+                {{ request()->routeIs('attendance.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
+                        <span class="ml-3">Attendance</span>
+                    </a>
+                </li> --}}
             </ul>
         </div>
     </aside>

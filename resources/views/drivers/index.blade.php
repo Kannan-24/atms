@@ -7,7 +7,7 @@
     <!-- Main Content Section -->
     <div class="py-6 mt-20 ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
-            < x-bread-crumb-navigation />
+            <x-bread-crumb-navigation />
 
             <div class="overflow-hidden bg-white rounded-lg shadow-xl">
                 <div class="p-6 overflow-x-auto">
@@ -17,7 +17,6 @@
                                 <th class="px-6 py-4 border-b-2 border-gray-200">#</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Name</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Phone</th>
-                                <th class="px-6 py-4 border-b-2 border-gray-200">License</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Status</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Actions</th>
                             </tr>
@@ -26,15 +25,15 @@
                             @foreach ($drivers as $driver)
                                 <tr class="border-b hover:bg-indigo-50">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $driver->name }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $driver->phone }}</td>
-                                    <td class="px-6 py-4 border-b border-gray-200">{{ $driver->license }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $driver->user->name }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $driver->user->phone }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $driver->status }}</td>
                                     <x-action-buttons model="drivers" :id="$driver->id" />
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <x-pagination :paginator="$drivers" />
                 </div>
             </div>
         </div>

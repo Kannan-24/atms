@@ -4,105 +4,80 @@ namespace App\Http\Controllers;
 
 use App\Models\Bus;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Driver;
-use App\Models\BusDriver;
 
 class BusController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of buses.
      */
     public function index()
     {
-        $buses = Bus::all();
+        $buses = Bus::paginate(10);
         return view('buses.index', compact('buses'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new bus.
      */
     public function create()
     {
-        $drivers = Driver::all();
-        return view('buses.create')->with('drivers', $drivers);
+        return view('buses.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created bus in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
-            'bus_number' => 'required|unique:buses',
-            'starting_point' => 'required',
-            'driver' => 'required|exists:drivers,id',
-        ]);
-        
-        $bus=Bus::create([
-            'bus_number' => $request->bus_number,
-            'starting_point' => $request->starting_point,
+            'number' => 'required|string|max:255',
+            'number_plate' => 'required|string|max:255|unique:buses,number_plate',
+            'no_of_seats' => 'required|integer',
         ]);
 
-        BusDriver::create([
-            'bus_id' => $bus->id,
-            'driver_id' => $request->driver,
-        ]);
+        Bus::create($request->all());
 
-        return redirect()->route('buses.index')
-            ->with('success', 'Bus created successfully.');
+        return redirect()->route('buses.index')->with('success', 'Bus created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Show the details of a specific bus.
      */
     public function show(Bus $bus)
     {
         return view('buses.show', compact('bus'));
     }
-    
+
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing a bus.
      */
     public function edit(Bus $bus)
     {
-        $drivers = Driver::all();
-        return view('buses.edit', compact('bus', 'drivers'));
+        return view('buses.edit', compact('bus'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a bus's details.
      */
     public function update(Request $request, Bus $bus)
     {
         $request->validate([
-            'bus_number' => 'required|unique:buses,bus_number,' . $bus->id,
-            'starting_point' => 'required',
-            'driver' => 'required|exists:drivers,id',
+            'number' => 'required|string|max:255',
+            'number_plate' => 'required|string|max:255|unique:buses,number_plate,' . $bus->id,
+            'no_of_seats' => 'required|integer',
         ]);
 
-        $bus->update([
-            'bus_number' => $request->bus_number,
-            'starting_point' => $request->starting_point,
-        ]);
+        $bus->update($request->all());
 
-        BusDriver::where('bus_id', $bus->id)->update([
-            'driver_id' => $request->driver,
-        ]);
-
-        return redirect()->route('buses.index')
-            ->with('success', 'Bus updated successfully.');
+        return redirect()->route('buses.index')->with('success', 'Bus updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove a bus from the system.
      */
     public function destroy(Bus $bus)
     {
-        BusDriver::where('bus_id', $bus->id)->delete();
         $bus->delete();
-        return redirect()->route('buses.index')
-            ->with('success', 'Bus deleted successfully.');
+        return redirect()->route('buses.index')->with('success', 'Bus deleted successfully.');
     }
 }
