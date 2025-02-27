@@ -25,22 +25,24 @@
                     </div>
                 </div>
                 <hr class="my-4">
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Stop Name:</h3>
-                    <p>{{ $stop->stop_name }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Latitude:</h3>
-                    <p>{{ $stop->latitude }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Longitude:</h3>
-                    <p>{{ $stop->longitude }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Status:</h3>
-                    <p>{{ $stop->status }}</p>
-                </div>
+                <table class="w-2/6 text-left">
+                    <tr>
+                        <th class="text-lg font-semibold">Stop Name</th>
+                        <td>{{ $stop->stop_name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Latitude</th>
+                        <td>{{ $stop->latitude }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Longitude</th>
+                        <td>{{ $stop->longitude }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Status</th>
+                        <td>{{ $stop->status }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

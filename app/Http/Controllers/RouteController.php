@@ -44,17 +44,17 @@ class RouteController extends Controller
     /**
      * Display the specified route.
      */
-    public function show(Route $route)
+    public function show(Route $busroute)
     {
-        return view('busroutes.show', compact('route'));
+        return view('busroutes.show', compact('busroute'));
     }
 
     /**
      * Show the form for editing the specified route.
      */
-    public function edit(Route $route)
+    public function edit(Route $busroute)
     {
-        return view('busroutes.edit', compact('route'));
+        return view('busroutes.edit', compact('busroute'));
     }
 
     /**

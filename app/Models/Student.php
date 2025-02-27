@@ -46,5 +46,14 @@ class Student extends Model
     {
         return $this->belongsTo(Department::class, 'dept_id');
     }
-    
+
+    public function userStop()
+    {
+        return $this->hasOne(UserStop::class, 'user_id', 'user_id');
+    }
+
+    public function stop()
+    {
+        return $this->hasOneThrough(Stop::class, UserStop::class, 'user_id', 'id', 'user_id', 'stop_id');
+    }
 }

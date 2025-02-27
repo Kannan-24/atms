@@ -28,10 +28,24 @@ class Faculty extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+        
     }
 
+    public function busIncharge()
+    {
+        return $this->hasMany(BusIncharge::class, 'faculty_id');
+    }
+
+    
     public function department()
     {
         return $this->belongsTo(Department::class, 'dept_id');
     }
+
+    public function busDrivers()
+    {
+        return $this->belongsToMany(BusDriver::class, 'bus_driver_faculty', 'faculty_id', 'bus_driver_id');
+    }
+
+
 }

@@ -8,6 +8,11 @@ class Department extends Model
 {
     protected $fillable = ['dept_name', 'degree', 'dept_code'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'dept_id');
+    }
+
     public function classes()
     {
         return $this->hasMany(Classes::class, 'dept_id');
@@ -22,4 +27,11 @@ class Department extends Model
     {
         return $this->hasMany(Faculty::class, 'dept_id');
     }
+
+    public function userstops()
+    {
+        return $this->hasMany(Userstop::class, 'dept_id');
+    }
+
+
 }

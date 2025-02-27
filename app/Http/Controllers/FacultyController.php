@@ -15,9 +15,8 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        $faculty = Faculty::with('user', 'department')->paginate(10); 
+        $faculty = Faculty::with('user', 'department')->paginate(10);
         return view('faculty.index', compact('faculty'));
-
     }
 
     /**
@@ -69,6 +68,7 @@ class FacultyController extends Controller
      */
     public function show(Faculty $faculty)
     {
+        $faculty->load('busIncharge.bus.busDriver.driver');
         return view('faculty.show', compact('faculty'));
     }
 
@@ -124,5 +124,23 @@ class FacultyController extends Controller
         $faculty->user->delete();
         $faculty->delete();
         return redirect()->route('faculty.index')->with('success', 'Faculty deleted successfully.');
+    }
+
+    public function facultyAssign(Faculty $faculty)
+    {
+
+        return response()->json([
+            'user' => [
+                'name' => $faculty->user->name,
+                'email' => $faculty->user->email,
+                'phone' => $faculty->user->phone,
+            ],
+            'department' => $faculty->department ? [
+                'name' => $faculty->department->dept_name,
+                'code' => $faculty->department->dept_code,
+            ] : null,
+            'ts_id' => $faculty->ts_id,
+            'address' => $faculty->address,
+        ]);
     }
 }

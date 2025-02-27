@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Batches;
 use App\Models\Department;
 use App\Models\Classes;
+use App\Models\Stop;
+use App\Models\UserStop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +22,6 @@ class StudentController extends Controller
         $students = Student::with(['user', 'class.department'])->paginate(10);
         return view('students.index', compact('students'));
     }
-
 
     /**
      * Show the form for creating a new student.
@@ -140,4 +141,52 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
     }
+
+    /**
+     * Show the form for assigning a stop to a student.
+     */
+
+    public function assignStops(Student $student)
+    {
+        $stops = Stop::all();
+        return view('students.assign_stops', compact('student', 'stops'));
+    }
+
+    /**
+     * Update the assigned stop for a student.
+     */
+    public function updateAssignedStop(Request $request, Student $student)
+    {
+        $request->validate([
+            'stop_id' => 'required|integer|exists:stops,id',
+        ]);
+
+        // Find existing stop assignment
+        $userStop = UserStop::where('user_id', $student->user_id)->first();
+
+        if ($userStop) {
+            // Update existing assignment
+            $userStop->update([
+                'stop_id' => $request->stop_id,
+            ]);
+        } else {
+            // Create a new assignment if it doesn't exist
+            UserStop::create([
+                'user_id' => $student->user_id,
+                'stop_id' => $request->stop_id,
+            ]);
+        }
+
+        return redirect()->route('students.index')->with('success', 'Stop updated successfully.');
+    }
+
+
+    public function editStop(Student $student)
+    {
+        $stops = Stop::all(); // Fetch all available stops
+        $assignedStop = UserStop::where('user_id', $student->user_id)->first();
+
+        return view('students.edit_stop', compact('student', 'stops', 'assignedStop'));
+    }
+
 }

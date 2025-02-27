@@ -43,11 +43,33 @@ class BatchesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Batches $batch)
+    public function show($id)
     {
-        
+        $batch = Batches::with('classes.department')->findOrFail($id);
+
+        foreach ($batch->classes as $class) {
+            $class->academicYearRoman = $this->getAcademicYearRoman($class->batch->start_year);
+        }
+
         return view('batches.show', compact('batch'));
     }
+
+    private function getAcademicYearRoman($startYear)
+    {
+        $currentYear = date('Y');
+        $academicYear = $currentYear - $startYear;
+
+        if ($academicYear < 1) {
+            $academicYear = 1;
+        } elseif ($academicYear > 5) { // Adjust this based on course duration
+            $academicYear = 5;
+        }
+
+        $yearMap = [1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV', 5 => 'V'];
+
+        return $yearMap[$academicYear] ?? 'NA';
+    }
+
 
     /**
      * Show the form for editing the specified resource.

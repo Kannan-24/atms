@@ -22,4 +22,14 @@ class Classes extends Model
     {
         return $this->hasMany(Student::class, 'class_id');
     }
+
+    public function faculty() // ✅ Use singular name for hasMany
+    {
+        return $this->hasMany(Faculty::class, 'class_id');
+    }
+
+    public function userstops() // ✅ Use plural name for hasMany
+    {
+        return $this->hasMany(Userstop::class, 'class_id');
+    }
 }

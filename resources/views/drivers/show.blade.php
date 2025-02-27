@@ -25,30 +25,32 @@
                     </div>
                 </div>
                 <hr class="my-4">
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Name:</h3>
-                    <p>{{ $driver->user->name }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Email:</h3>
-                    <p>{{ $driver->user->email }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Phone:</h3>
-                    <p>{{ $driver->user->phone }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">License:</h3>
-                    <p>{{ $driver->license }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Address:</h3>
-                    <p>{{ $driver->address }}</p>
-                </div>
-                <div class="mb-4">
-                    <h3 class="text-lg font-semibold">Status:</h3>
-                    <p>{{ $driver->status }}</p>
-                </div>
+                <table class="w-2/4 text-left">
+                    <tr>
+                        <th class="text-lg font-semibold">Name</th>
+                        <td>{{ $driver->user->name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Email</th>
+                        <td>{{ $driver->user->email }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Phone</th>
+                        <td>{{ $driver->user->phone }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">License</th>
+                        <td>{{ $driver->license }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Address</th>
+                        <td>{{ $driver->address }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Status</th>
+                        <td>{{ $driver->status }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

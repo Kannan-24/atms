@@ -24,7 +24,7 @@
                         </div>
                         <div class="absolute top-0 right-0 p-3">
                             <span class="inline-block px-3 py-1 text-xs font-semibold text-white bg-black bg-opacity-30 rounded-full">
-                                {{ $batch->id }}
+                                {{ $loop->iteration }}
                             </span>
                         </div>
                     </div>

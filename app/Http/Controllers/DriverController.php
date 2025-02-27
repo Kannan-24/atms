@@ -114,4 +114,24 @@ class DriverController extends Controller
         $driver->delete();
         return redirect()->route('drivers.index')->with('success', 'Driver deleted successfully.');
     }
+
+    /**
+     * Show the form for assigning a bus to a driver.
+     */
+
+    public function assign($id)
+    {
+        $driver = Driver::with('user')->find($id);
+        
+        return response()->json([
+            'user' => [
+                'name' => $driver->user->name,
+                'email' => $driver->user->email,
+                'phone' => $driver->user->phone,
+            ],
+            'license' => $driver->license,
+            'address' => $driver->address,
+            'status' => $driver->status,
+        ]);
+    }
 }

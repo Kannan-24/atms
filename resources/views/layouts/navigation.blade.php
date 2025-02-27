@@ -169,13 +169,7 @@
                         <span class="ml-3">Stops</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('userstops.index') }}"
-                        class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
-                    {{ request()->routeIs('userstops.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
-                        <span class="ml-3">User Stops</span>
-                    </a>
-                </li>
+                
                 {{--  
                 <li>
                     <a href="{{ route('parents.index') }}"

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bus_driver', function (Blueprint $table) {
+        Schema::create('bus_drivers', function (Blueprint $table) {
             $table->id();
             $table->integer('bus_id');
             $table->integer('driver_id');
-            $table->timestamp('validfrom')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('validto')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('valid_from')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('valid_to')->nullable();
             $table->timestamps();
         });
     }

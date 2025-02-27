@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class stop extends Model
+class Stop extends Model
 {
     protected $fillable = ['stop_name', 'latitude', 'longitude', 'status'];
 
-    public function userstops()
+    public function users(): HasMany
     {
-        return $this->hasMany(Userstop::class);
+        return $this->hasMany(UserStop::class);
     }
 }
