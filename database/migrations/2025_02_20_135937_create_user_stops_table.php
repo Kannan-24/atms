@@ -15,7 +15,7 @@ class CreateUserstopsTable extends Migration
     {
         Schema::create('userstops', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('stop_id');
             $table->timestamps();
 

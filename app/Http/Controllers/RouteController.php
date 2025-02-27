@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Route;
+use App\Models\Stop;
+use App\Models\RouteStop;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller
@@ -81,5 +83,26 @@ class RouteController extends Controller
     {
         $route->delete();
         return redirect()->route('busroutes.index')->with('success', 'Route deleted successfully.');
+    }
+
+    public function assignStops($route_id)
+    {
+        $route = Route::findOrFail($route_id);
+        $stops = Stop::all(); // Fetch all stops to display in a dropdown
+
+        return view('busroutes.assignStops', compact('route', 'stops'));
+    }
+
+    public function storeAssignedStops(Request $request, $route_id)
+    {
+        $request->validate([
+            'stop_ids' => 'required|array',
+            'stop_ids.*' => 'exists:stops,id',
+        ]);
+
+        $route = Route::findOrFail($route_id);
+        $route->stops()->sync($request->stop_ids);
+
+        return redirect()->route('busroutes.show', $route_id)->with('success', 'Stops assigned successfully.');
     }
 }

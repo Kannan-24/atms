@@ -6,15 +6,14 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\DriverController;
-use App\Http\Controllers\BusRouteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ParentsController;
-use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BatchesController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\StopController;
+use App\Http\Controllers\ReportController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('buses', BusController::class);
     Route::resource('busroutes', RouteController::class);
     Route::resource('stops', StopController::class);
+    Route::resource('reports', ReportController::class);
     
     //driver routes
     Route::resource('drivers', DriverController::class);
@@ -71,6 +71,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/students/{student}/edit-stop', [StudentController::class, 'editStop'])->name('students.editStop');
     Route::post('/students/{student}/update-stop', [StudentController::class, 'updateAssignedStop'])->name('students.updateStop');
 
+    // Route Stops
+    Route::get('/busroutes/{route}/assignStops', [RouteController::class, 'assignStops'])->name('busroutes.assignStops');
+    Route::post('/busroutes/{route}/storeAssignedStops', [RouteController::class, 'storeAssignedStops'])->name('busroutes.storeAssignedStops');
 });
 
 // Include Authentication Routes

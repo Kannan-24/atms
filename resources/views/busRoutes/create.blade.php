@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">
-        {{ __('Edit Bus Route') }} - {{ config('app.name', 'ATMS') }}
+        {{ __('Create Bus Route') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
     <!-- Main Content Section -->
@@ -9,14 +9,13 @@
             <x-bread-crumb-navigation />
             <!-- Form Container -->
             <div class="p-8 bg-white border border-gray-200 rounded-lg shadow-lg">
-                <form action="{{ route('busroutes.update', $busroute->id) }}" method="POST">
+                <form action="{{ route('busroutes.store') }}" method="POST">
                     @csrf
-                    @method('PUT')
 
                     <!-- Route Name -->
                     <div class="mb-5">
                         <label for="route_name" class="block text-sm font-semibold text-gray-700">Route Name</label>
-                        <input type="text" name="route_name" id="route_name" value="{{ $busroute->route_name }}"
+                        <input type="text" name="route_name" id="route_name"
                             class="w-full transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
@@ -24,7 +23,7 @@
                     <!-- Start Location -->
                     <div class="mb-5">
                         <label for="start_location" class="block text-sm font-semibold text-gray-700">Start Location</label>
-                        <input type="text" name="start_location" id="start_location" value="{{ $busroute->start_location }}"
+                        <input type="text" name="start_location" id="start_location"
                             class="w-full transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
@@ -32,7 +31,7 @@
                     <!-- End Location -->
                     <div class="mb-5">
                         <label for="end_location" class="block text-sm font-semibold text-gray-700">End Location</label>
-                        <input type="text" name="end_location" id="end_location" value="{{ $busroute->end_location }}"
+                        <input type="text" name="end_location" id="end_location"
                             class="w-full transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
@@ -40,7 +39,7 @@
                     <!-- Total Distance -->
                     <div class="mb-5">
                         <label for="total_distance" class="block text-sm font-semibold text-gray-700">Total Distance (km)</label>
-                        <input type="number" name="total_distance" id="total_distance" value="{{ $busroute->total_distance }}"
+                        <input type="number" name="total_distance" id="total_distance"
                             class="w-full transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
@@ -51,7 +50,7 @@
                             Cancel
                         </a>
                         <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">
-                            Update Bus Route
+                            Create Bus Route
                         </button>
                     </div>
                 </form>
