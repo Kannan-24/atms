@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_stops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('stop_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('stop_id');
             $table->timestamps();
         });
     }

@@ -13,4 +13,10 @@ class Stop extends Model
     {
         return $this->hasMany(UserStop::class);
     }
+
+    public function routes()
+    {
+        return $this->belongsToMany(Route::class, 'route_stops', 'stop_id', 'route_id');
+    }
+
 }

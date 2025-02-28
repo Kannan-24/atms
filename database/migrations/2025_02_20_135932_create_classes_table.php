@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('dept_id');
             $table->integer('batch_id');
-            $table->string('year');
             $table->string('section');
             $table->timestamps();
         });
