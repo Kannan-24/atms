@@ -28,4 +28,8 @@ class Bus extends Model
         return $this->hasOne(BusDriver::class, 'bus_id');
     }
 
+    public function locations()
+    {
+        return $this->hasMany(BusLocation::class);
+    }
 }
