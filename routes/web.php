@@ -74,6 +74,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/students/{student}/edit-stop', [StudentController::class, 'editStop'])->name('students.editStop');
     Route::post('/students/{student}/update-stop', [StudentController::class, 'updateAssignedStop'])->name('students.updateStop');
 
+    Route::get('/locations/{busId}', [BusController::class, 'locations'])->name('locations');
+    Route::get('/track-buses', [BusController::class, 'trackBuses'])->name('track-buses.index');
     // Route Stops
     Route::get('/busroutes/{route}/assignStops', [RouteController::class, 'assignStops'])->name('busroutes.assignStops');
     Route::post('/busroutes/{route}/storeAssignedStops', [RouteController::class, 'storeAssignedStops'])->name('busroutes.storeAssignedStops');

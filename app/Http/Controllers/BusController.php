@@ -7,6 +7,7 @@ use App\Models\BusDriver;
 use App\Models\Driver;
 use App\Models\Faculty;
 use App\Models\BusIncharge;
+use App\Models\BusLocation;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -93,7 +94,7 @@ class BusController extends Controller
     {
         // Get drivers who are either not assigned or have an expired valid_to date
         $assignedDriverIds = BusDriver::whereNull('valid_to')
-        ->orWhere('valid_to', '>=', now()) // Drivers still valid
+            ->orWhere('valid_to', '>=', now()) // Drivers still valid
             ->pluck('driver_id')
             ->toArray();
 
@@ -117,7 +118,7 @@ class BusController extends Controller
         $existingAssignment = BusDriver::where('driver_id', $request->driver_id)
             ->where(function ($query) {
                 $query->whereNull('valid_to')
-                ->orWhere('valid_to', '>=', now());
+                    ->orWhere('valid_to', '>=', now());
             })
             ->first();
 
@@ -207,5 +208,68 @@ class BusController extends Controller
         return redirect()->back()->with('error', 'Faculty Incharge not found.');
     }
 
+    /**
+     * Update the location of a bus.
+     */
+    public function updateLocation(Request $request)
+    {
+        $request->validate([
+            'driver_id' => 'required|exists:drivers,id',
+            'bus_id' => 'required|exists:buses,id',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
 
+        $driver = Driver::find($request->driver_id);
+        $bus = Bus::find($request->bus_id);
+
+        if (!$driver || !$bus) {
+            return response()->json(['error' => 'Driver or bus not found.'], 404);
+        }
+
+        try {
+            BusLocation::create([
+                'bus_id' => $bus->id,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+            ]);
+
+            return response()->json(['message' => 'Location updated successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'error' => 'An error occurred while updating location.',
+                    'message' => $e->getMessage()
+                ],
+                500
+            );
+        }
+    }
+
+    public function locations(Request $request, $busId)
+    {
+        if (!$busId) {
+            return response()->json(['error' => 'Bus ID is required.'], 400);
+        }
+
+        $bus = Bus::find($busId);
+        if (!$bus) {
+            return response()->json(['error' => 'Bus not found.'], 404);
+        }
+
+        $locations = BusLocation::with('bus')
+            ->where('bus_id', $busId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Group locations by bus ID
+        $locations = $locations->groupBy('bus_id');
+        return response()->json($locations);
+    }
+
+    public function trackBuses()
+    {
+        $buses = Bus::with('locations')->get();
+        return view('trackBus.index', compact('buses'));
+    }
 }

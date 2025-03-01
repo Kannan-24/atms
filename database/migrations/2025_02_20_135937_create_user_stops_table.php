@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserstopsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateUserstopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('userstops', function (Blueprint $table) {
+        Schema::create('user_stops', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('stop_id');
             $table->timestamps();
-
         });
     }
 
@@ -29,6 +28,6 @@ class CreateUserstopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userstops');
+        Schema::dropIfExists('user_stops');
     }
-}
+};
