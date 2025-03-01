@@ -15,9 +15,6 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\StopController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AttendanceController;
-
-
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,12 +42,15 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('batches', BatchesController::class);
     Route::resource('classes', ClassesController::class);
-    Route::resource('departments', DepartmentController::class);
     Route::resource('parents', ParentsController::class);
     Route::resource('buses', BusController::class);
     Route::resource('busroutes', RouteController::class);
     Route::resource('stops', StopController::class);
     Route::resource('reports', ReportController::class);
+
+    Route::resource('departments', DepartmentController::class);
+    Route::get('/departments/import', [DepartmentController::class, 'import'])->name('departments.import');
+    // Route::post('/departments/importdepartments', [DepartmentController::class, 'importdepartments'])->name('departments.importdepartments');
 
     //driver routes
     Route::resource('drivers', DriverController::class);

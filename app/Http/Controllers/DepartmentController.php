@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\DepartmentsImport;
 
+
 class DepartmentController extends Controller
 {
     /**
@@ -87,23 +88,24 @@ class DepartmentController extends Controller
             ->with('success', 'Department deleted successfully.');
     }
 
+    
     /**
      * Show the import form.
      */
-    // Show the import page
-    public function showImportForm()
+    public function import()
     {
-        return view('departments.import'); // Ensure you have resources/views/departments/import.blade.php
+        return view('departments.import');
     }
-
-    public function import(Request $request)
+    
+    public function importdepartments(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:xlsx,csv'
+            'file' => 'required|mimes:csv'
         ]);
-
+    
         Excel::import(new DepartmentsImport, $request->file('file'));
-
-        return redirect()->route('departments.index')->with('success', 'Departments imported successfully.');
+    
+        return redirect()->route('departments.index')
+            ->with('success', 'Departments imported successfully.');
     }
 }
