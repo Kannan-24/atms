@@ -9,10 +9,6 @@
 
             <x-bread-crumb-navigation />
 
-            <a href="{{ route('departments.import') }}"
-                class="inline-block mb-4 px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md shadow-md hover:bg-green-700">
-                Import Departments
-            </a>
             <div class="bg-white p-4 rounded-2xl">
                 <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach ($departments as $department)
