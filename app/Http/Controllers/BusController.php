@@ -269,7 +269,20 @@ class BusController extends Controller
 
     public function trackBuses()
     {
-        $buses = Bus::with('locations')->get();
+        $buses = Bus::with('locations')->paginate(10);
         return view('trackBus.index', compact('buses'));
     }
+
+    public function track($busId)
+    {
+        $bus = Bus::with('locations')->find($busId);
+
+        if (!$bus) {
+            return abort(404, 'Bus not found');
+        }
+
+        return view('trackBus.show', compact('bus'));
+    }
+
+
 }

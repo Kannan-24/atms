@@ -47,10 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('busroutes', RouteController::class);
     Route::resource('stops', StopController::class);
     Route::resource('reports', ReportController::class);
-
     Route::resource('departments', DepartmentController::class);
-    Route::get('/departments/import', [DepartmentController::class, 'import'])->name('departments.import');
-    // Route::post('/departments/importdepartments', [DepartmentController::class, 'importdepartments'])->name('departments.importdepartments');
 
     //driver routes
     Route::resource('drivers', DriverController::class);
@@ -76,6 +73,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/locations/{busId}', [BusController::class, 'locations'])->name('locations');
     Route::get('/track-buses', [BusController::class, 'trackBuses'])->name('track-buses.index');
+    Route::get('/track-bus/{bus}', [BusController::class, 'track'])->name('trackBus.track');
+
+
     // Route Stops
     Route::get('/busroutes/{route}/assignStops', [RouteController::class, 'assignStops'])->name('busroutes.assignStops');
     Route::post('/busroutes/{route}/storeAssignedStops', [RouteController::class, 'storeAssignedStops'])->name('busroutes.storeAssignedStops');
