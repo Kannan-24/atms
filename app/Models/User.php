@@ -20,7 +20,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-    'name', 'email', 'password', 'phone'
+        'name',
+        'email',
+        'password',
+        'phone'
     ];
 
 
@@ -46,17 +49,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    public function student()
-    {
-        return $this->hasOne(Student::class);
-    }
-
-    public function stops(): HasMany
-    {
-        return $this->hasMany(UserStop::class);
-    }
-
-
-    
 }
