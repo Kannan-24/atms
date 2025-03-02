@@ -34,7 +34,7 @@
         </ol>
 
         <!-- Show "Create" and "Import" Buttons Only on Index Pages -->
-        @if (count($segments) == 1 && !in_array($lastSegment, ['profile', 'account-settings']))
+        @if (count($segments) == 1 && !in_array($lastSegment, ['profile', 'account-settings', 'track-buses']))
             <div class="flex space-x-2">
                 <a href="{{ url($url . '/create') }}"
                     class="px-5 py-2 text-sm text-white transition duration-300 bg-green-600 rounded-lg shadow-md hover:bg-green-700">
