@@ -12,6 +12,7 @@ use App\Models\BusLocation;
 use App\Models\Route;
 use App\Models\Stop;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -290,7 +291,7 @@ class BusController extends Controller
 
     public function attendance(Request $request)
     {
-     
+
         try {
             $userId = Student::where('roll_no', $request->roll_no)->first();
 
@@ -298,8 +299,18 @@ class BusController extends Controller
                 return response()->json(['error' => 'Student not found.'], 404);
             }
 
-            $stop = Stop::findNearestStop($request->latitude, $request->longitude);
+            $stop = $this->findNearestStop($request->latitude, $request->longitude);
+
+            if (!$stop) {
+                return response()->json(['error' => 'No stops found nearby.'], 404);
+            }
+
+            $stop = Stop::find($stop->id);
             $route = Route::whereIn('id', $stop->route->pluck('route_id'))->first();
+
+            if (!$route) {
+                return response()->json(['error' => 'No route found for the stop.'], 404);
+            }
 
             $attendance = Attendance::create([
                 'user_id' => $userId->user_id,
@@ -317,5 +328,29 @@ class BusController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function findNearestStop($latitude, $longitude)
+    {
+        $minDistance = 500;  // Minimum distance in meters
+        $maxDistance = 1500; // Maximum distance in meters
+
+        $nearestStop = DB::select("
+            SELECT id, name, latitude, longitude, 
+            ( 6371000 * acos(
+                cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) +
+                sin(radians(?)) * sin(radians(latitude))
+            ) ) AS distance
+            FROM stops
+            HAVING distance BETWEEN ? AND ?
+            ORDER BY distance ASC
+            LIMIT 1
+        ", [$latitude, $longitude, $latitude, $minDistance, $maxDistance]);
+
+        if (!empty($nearestStop)) {
+            return $nearestStop[0];
+        }
+
+        return null;
     }
 }
