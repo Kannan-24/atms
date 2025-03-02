@@ -316,7 +316,7 @@ class BusController extends Controller
                 'user_id' => $userId->user_id,
                 'check_in' => now(),
                 'check_in_stop_id' => $stop->id,
-                'check_in_gps' => 'POINT(' . $request->latitude . ' ' . $request->longitude . ')',
+                'check_in_gps' => 'POINT(' . $request->latitude . ', ' . $request->longitude . ')',
                 'towards_college' => true,
                 'status' => 'Present',
                 'bus_id' => $request->bus_id,
