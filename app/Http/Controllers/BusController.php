@@ -336,7 +336,7 @@ class BusController extends Controller
         $maxDistance = 1500; // Maximum distance in meters
 
         $nearestStop = DB::select("
-            SELECT id, name, latitude, longitude, 
+            SELECT id, stop_name, latitude, longitude, 
             ( 6371000 * acos(
                 cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) +
                 sin(radians(?)) * sin(radians(latitude))
