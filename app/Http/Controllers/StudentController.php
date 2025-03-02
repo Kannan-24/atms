@@ -59,7 +59,7 @@ class StudentController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => Hash::make('defaultpassword'), // Set a default password or generate one
+            'password' => Hash::make('Atms@2025'), // Set a default password or generate one
         ]);
 
         // Create student record
@@ -196,7 +196,7 @@ class StudentController extends Controller
         return view('students.edit_stop', compact('student', 'stops', 'assignedStop'));
     }
 
-    
+
     public function showImportForm()
     {
         $batches = Batches::all();
@@ -228,6 +228,4 @@ class StudentController extends Controller
             return back()->with('error', 'Error importing students: ' . $e->getMessage());
         }
     }
-
 }
-

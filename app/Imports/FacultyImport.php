@@ -18,7 +18,7 @@ class FacultyImport implements ToModel, WithHeadingRow
             'name' => $row['name'],
             'email' => $row['email'],
             'phone' => $row['phone'],
-            'password' => Hash::make('defaultpassword'), // Default password
+            'password' => Hash::make('Atms@2025'), // Default password
         ]);
 
         // Create faculty record

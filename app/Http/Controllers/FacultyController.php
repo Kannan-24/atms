@@ -47,7 +47,8 @@ class FacultyController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make('defaultpassword'), // Set a default password or generate one
+            'phone' => $request->phone,
+            'password' => Hash::make('Atms@2025'), // Set a default password or generate one
         ]);
 
         // Create faculty record
@@ -128,7 +129,6 @@ class FacultyController extends Controller
 
     public function facultyAssign(Faculty $faculty)
     {
-
         return response()->json([
             'user' => [
                 'name' => $faculty->user->name,

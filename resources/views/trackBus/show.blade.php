@@ -20,7 +20,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5l7 7-7 7" />
                             </svg>
-                            <a href="{{ route('track-buses.index') }}" class="font-medium text-blue-800 hover:text-blue-900">
+                            <a href="{{ route('track-buses.index') }}"
+                                class="font-medium text-blue-800 hover:text-blue-900">
                                 Track Bus
                             </a>
                         </li>
@@ -58,19 +59,22 @@
                 <h2 class="text-xl font-semibold text-blue-900 mt-2 ">Driver Details</h2>
                 <table class="w-1/3 text-left">
                     <tbody>
-                        @if($bus->busDriver)
+                        @if ($bus->busDriver)
                             <tr>
                                 <td class="py-2 px-4 text-gray-600">Driver Name:</td>
-                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $bus->busDriver->driver->user->name }}</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->busDriver->driver->user->name }}</td>
                             </tr>
                             <tr>
                                 <td class="py-2 px-4 text-gray-600">Driver Phone:</td>
-                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $bus->busDriver->driver->user->phone }}</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->busDriver->driver->user->phone }}</td>
                             </tr>
                         @else
                             <tr>
                                 <td colspan="2" class="py-2 px-4">
-                                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg" role="alert">
+                                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg"
+                                        role="alert">
                                         <p class="font-bold">Notice</p>
                                         <p>Driver is not assigned</p>
                                     </div>
@@ -82,21 +86,22 @@
                 <h2 class="text-xl font-semibold text-blue-900 mt-2">Bus Incharge Details</h2>
                 <table class="w-1/3 text-left">
                     <tbody>
-                        @if($bus->busIncharge)
-                            @foreach($bus->busIncharge as $incharge)
-                                <tr>
-                                    <td class="py-2 px-4 text-gray-600">Incharge Name:</td>
-                                    <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $incharge->user->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-2 px-4 text-gray-600">Incharge Phone:</td>
-                                    <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $incharge->user->phone }}</td>
-                                </tr>
-                            @endforeach
+                        @if ($bus->facultyIncharge)
+                            <tr>
+                                <td class="py-2 px-4 text-gray-600">Incharge Name:</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->facultyIncharge->faculty->user->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 text-gray-600">Incharge Phone:</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{  $bus->facultyIncharge->faculty->user->phone }}
+                                </td>
+                            </tr>
                         @else
                             <tr>
                                 <td colspan="2" class="py-2 px-4">
-                                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg" role="alert">
+                                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg"
+                                        role="alert">
                                         <p class="font-bold">Notice</p>
                                         <p>Incharge is not assigned</p>
                                     </div>
@@ -121,9 +126,14 @@
         let marker;
 
         async function initMap() {
-            const { Map } = await google.maps.importLibrary("maps");
+            const {
+                Map
+            } = await google.maps.importLibrary("maps");
             map = new Map(document.getElementById("map"), {
-                center: { lat: 11.313121581667131, lng: 77.5504970007397 },
+                center: {
+                    lat: 11.313121581667131,
+                    lng: 77.5504970007397
+                },
                 zoom: 14,
                 mapId: "4504f8b37365c3d0",
             });
@@ -142,13 +152,18 @@
         }
 
         async function showBusLocation(buses) {
-            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+            const {
+                AdvancedMarkerElement
+            } = await google.maps.importLibrary("marker");
 
             if (!buses[{{ $bus->id }}] || buses[{{ $bus->id }}].length === 0) return;
 
             const latestLocation = buses[{{ $bus->id }}][0];
 
-            map.setCenter({ lat: latestLocation.latitude, lng: latestLocation.longitude });
+            map.setCenter({
+                lat: latestLocation.latitude,
+                lng: latestLocation.longitude
+            });
             map.setZoom(16);
 
             if (marker) marker.setMap(null);

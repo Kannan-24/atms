@@ -48,7 +48,7 @@ class ParentsController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => Hash::make('defaultpassword'), // Set a default password or generate one
+            'password' => Hash::make('Atms@2025'), // Set a default password or generate one
         ]);
 
         // Create parent record
