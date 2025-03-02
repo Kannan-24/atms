@@ -10,6 +10,7 @@ use App\Models\Faculty;
 use App\Models\BusIncharge;
 use App\Models\BusLocation;
 use App\Models\Route;
+use App\Models\RouteStop;
 use App\Models\Stop;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
@@ -305,7 +306,7 @@ class BusController extends Controller
             }
 
             $stop = Stop::find($stop->id);
-            $route = Route::whereIn('id', $stop->route->pluck('route_id'))->first();
+            $route = Route::whereIn('id', RouteStop::where('stop_id', $stop->id)->pluck('route_id'))->first();
 
             if (!$route) {
                 return response()->json(['error' => 'No route found for the stop.'], 404);
