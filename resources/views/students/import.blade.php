@@ -11,7 +11,7 @@
                 <h2 class="text-2xl font-bold mb-4 text-gray-700">📂 Import Students</h2>
                 <p class="text-gray-600 mb-4">
                     Upload a CSV or Excel file to import students.
-                    <a href="{{ asset('assets/samplecsvs/sample-students.csv') }}"
+                    <a href="{{ asset('assets/samplecsv/sample-students.csv') }}"
                         class="text-blue-600 font-semibold hover:underline">
                         Download Sample File 📥
                     </a>
