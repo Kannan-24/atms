@@ -93,6 +93,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('busroutes', RouteController::class);
     Route::resource('stops', StopController::class);
     Route::resource('reports', ReportController::class);
+    
 });
 
 
