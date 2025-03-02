@@ -140,8 +140,13 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        // Delete the user associated with the student
+        $student->user->delete();
+
+        // Delete the student record
         $student->delete();
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
+
+        return redirect()->route('students.index')->with('success', 'Student and associated user deleted successfully.');
     }
 
     /**
