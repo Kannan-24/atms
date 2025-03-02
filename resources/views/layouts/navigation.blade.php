@@ -184,15 +184,16 @@
                         <span class="ml-3">Reports</span>
                     </a>
                 </li>
+                --}}
 
-                {{--  
+                 
                 <li>
                     <a href="{{ route('attendance.index') }}"
                         class="flex items-center p-2 rounded-lg transition-transform duration-300 ease-in-out transform 
                 {{ request()->routeIs('attendance.index') ? 'bg-blue-500 text-white' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400' }}">
                         <span class="ml-3">Attendance</span>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </div>
     </aside>

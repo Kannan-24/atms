@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Bus;
 use App\Models\BusDriver;
 use App\Models\Driver;
 use App\Models\Faculty;
 use App\Models\BusIncharge;
 use App\Models\BusLocation;
+use App\Models\Route;
+use App\Models\Stop;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -284,5 +288,34 @@ class BusController extends Controller
         return view('trackBus.show', compact('bus'));
     }
 
+    public function attendance(Request $request)
+    {
+     
+        try {
+            $userId = Student::where('roll_no', $request->roll_no)->first();
 
+            if (!$userId) {
+                return response()->json(['error' => 'Student not found.'], 404);
+            }
+
+            $stop = Stop::findNearestStop($request->latitude, $request->longitude);
+            $route = Route::whereIn('id', $stop->route->pluck('route_id'))->first();
+
+            $attendance = Attendance::create([
+                'user_id' => $userId->user_id,
+                'check_in' => now(),
+                'check_in_stop_id' => $stop->id,
+                'check_in_gps' => 'POINT(' . $request->latitude . ' ' . $request->longitude . ')',
+                'towards_college' => true,
+                'status' => 'Present',
+                'bus_id' => $request->bus_id,
+                'route_id' => $route->id,
+                'distance_traveled' => 0,
+            ]);
+
+            return response()->json($attendance);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

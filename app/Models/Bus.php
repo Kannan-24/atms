@@ -32,4 +32,18 @@ class Bus extends Model
     {
         return $this->hasMany(BusLocation::class);
     }
+
+    public function route()
+    {
+        return $this->hasOneThrough(Route::class, BusRoute::class, 'bus_id', 'id', 'id', 'route_id');
+    }
+
+    public function getStudentsAttribute()
+    {
+        $stops = $this->route->stops;
+
+        return Student::with('stop')->whereHas('stop', function ($query) use ($stops) {
+            $query->whereIn('stop_id', $stops->pluck('id'));
+        })->get();
+    }
 }

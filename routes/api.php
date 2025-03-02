@@ -11,6 +11,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/driver/login', [UserController::class, 'login']);
 Route::post('/driver/update-location', [BusController::class, 'updateLocation']);
+Route::post('/attendance', [BusController::class, 'attendance']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
