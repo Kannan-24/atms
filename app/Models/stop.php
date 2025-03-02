@@ -14,9 +14,22 @@ class Stop extends Model
         return $this->hasMany(UserStop::class);
     }
 
-    public function routes()
+    public function route()
     {
-        return $this->belongsToMany(Route::class, 'route_stops', 'stop_id', 'route_id');
+        return $this->belongsTo(Route::class, 'route_stops', 'stop_id', 'route_id');
     }
 
+    public static function findNearestStop($latitude, $longitude, $minDistance = 500, $maxDistance = 1500)
+    {
+        return self::selectRaw("
+            id, name, latitude, longitude,
+            ( 6371000 * acos(
+                cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) +
+                sin(radians(?)) * sin(radians(latitude))
+            ) ) AS distance
+        ", [$latitude, $longitude, $latitude])
+            ->havingBetween('distance', [$minDistance, $maxDistance])
+            ->orderBy('distance', 'asc')
+            ->first();
+    }
 }

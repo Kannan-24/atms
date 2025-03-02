@@ -22,11 +22,16 @@
                         @foreach ($buses as $bus)
                             <tr class="border border-gray-300">
                                 <td class="border border-gray-300 px-4 py-2">{{ $bus->number }}</td>
-                                {{-- <td class="border border-gray-300 px-4 py-2">{{ $bus->students->count() }}</td> --}}
+                                <td class="border border-gray-300 px-4 py-2">{{ $bus->students ? $bus->students->count() : 0 }}</td>
                                 <td class="border border-gray-300 px-4 py-2">
                                     <a href="{{ route('attendance.show', $bus->id) }}"
                                        class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
                                         View Attendance
+                                    </a>
+                                    {{-- Put Attendance --}}
+                                    <a href="{{ route('attendance.create', $bus) }}"
+                                       class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
+                                        Put Attendance
                                     </a>
                                 </td>
                             </tr>

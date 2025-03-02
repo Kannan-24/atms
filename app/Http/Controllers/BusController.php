@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Bus;
 use App\Models\BusDriver;
 use App\Models\Driver;
 use App\Models\Faculty;
 use App\Models\BusIncharge;
 use App\Models\BusLocation;
+use App\Models\Route;
+use App\Models\RouteStop;
+use App\Models\Stop;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -284,5 +290,67 @@ class BusController extends Controller
         return view('trackBus.show', compact('bus'));
     }
 
+    public function attendance(Request $request)
+    {
 
+        try {
+            $userId = Student::where('roll_no', $request->roll_no)->first();
+
+            if (!$userId) {
+                return response()->json(['error' => 'Student not found.'], 404);
+            }
+
+            $stop = $this->findNearestStop($request->latitude, $request->longitude);
+            if (!$stop) {
+                return response()->json(['error' => 'No stops found nearby.'], 404);
+            }
+
+            $stop = Stop::find($stop->id);
+            $route = Route::whereIn('id', RouteStop::where('stop_id', $stop->id)->pluck('route_id'))->first();
+
+            if (!$route) {
+                return response()->json(['error' => 'No route found for the stop.'], 404);
+            }
+
+            $attendance = Attendance::create([
+                'user_id' => $userId->user_id,
+                'check_in' => now(),
+                'check_in_stop_id' => $stop->id,
+                'check_in_gps' => "ST_GeomFromText('POINT(11.3265769 77.7078303)')",
+                'towards_college' => true,
+                'status' => 'Present',
+                'bus_id' => $request->bus_id,
+                'route_id' => $route->id,
+                'distance_traveled' => 0,
+            ]);
+
+            return response()->json($attendance);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function findNearestStop($latitude, $longitude)
+    {
+        $minDistance = 0;  // Minimum distance in meters
+        $maxDistance = 1500; // Maximum distance in meters
+
+        $nearestStop = DB::select("
+            SELECT id, stop_name, latitude, longitude, 
+            ( 6371000 * acos(
+                cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) +
+                sin(radians(?)) * sin(radians(latitude))
+            ) ) AS distance
+            FROM stops
+            HAVING distance BETWEEN ? AND ?
+            ORDER BY distance ASC
+            LIMIT 1
+        ", [$latitude, $longitude, $latitude, $minDistance, $maxDistance]);
+
+        if (!empty($nearestStop)) {
+            return $nearestStop[0];
+        }
+
+        return null;
+    }
 }

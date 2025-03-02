@@ -18,11 +18,19 @@ class AttendanceController extends Controller
     }
 
     /**
+     * Special create form for attendance records for a specific bus.
+     */
+    public function create(Bus $bus)
+    {
+        return view('attendance.create', compact('bus'));
+    }
+
+    /**
      * Show attendance records for a specific bus.
      */
     public function show($bus_id)
     {
-        $bus = Bus::with(['students.attendance'])->findOrFail($bus_id);
+        $bus = Bus::findOrFail($bus_id);
         return view('attendance.show', compact('bus'));
     }
 }

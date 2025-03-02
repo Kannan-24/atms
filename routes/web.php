@@ -79,7 +79,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/batches/import', [BatchesController::class, 'import'])->name('batches.import');
     
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
-    Route::get('/attendance/{bus_id}', [AttendanceController::class, 'show'])->name('attendance.show');
+    Route::get('/attendance/{bus}/create', [AttendanceController::class, 'create'])->name('attendance.create');
+    Route::get('/attendance/{bus}', [AttendanceController::class, 'show'])->name('attendance.show');
     
     
     Route::resource('departments', DepartmentController::class);
