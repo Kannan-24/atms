@@ -300,7 +300,6 @@ class BusController extends Controller
             }
 
             $stop = $this->findNearestStop($request->latitude, $request->longitude);
-
             if (!$stop) {
                 return response()->json(['error' => 'No stops found nearby.'], 404);
             }
@@ -332,7 +331,7 @@ class BusController extends Controller
 
     public function findNearestStop($latitude, $longitude)
     {
-        $minDistance = 500;  // Minimum distance in meters
+        $minDistance = 0;  // Minimum distance in meters
         $maxDistance = 1500; // Maximum distance in meters
 
         $nearestStop = DB::select("
