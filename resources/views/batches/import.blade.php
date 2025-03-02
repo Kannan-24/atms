@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">
-        {{ __('Import Departments') }} - {{ config('app.name', 'ATMS') }}
+        {{ __('Import Batches') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
     <!-- Main Content Section -->
@@ -10,17 +10,17 @@
             <x-bread-crumb-navigation />
 
             <div class="bg-white p-6 rounded-2xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4 text-gray-700">📂 Import Departments</h2>
+                <h2 class="text-2xl font-bold mb-4 text-gray-700">📂 Import Batches</h2>
                 <p class="text-gray-600 mb-4">
-                    Upload a CSV or Excel file to import departments. 
-                    <a href="{{ asset('sample-departments.csv') }}" 
+                    Upload a CSV or Excel file to import batches. 
+                    <a href="{{ asset('sample-batches.csv') }}" 
                        class="text-blue-600 font-semibold hover:underline">
                         Download Sample File 📥
                     </a>
                 </p>
 
                 <!-- Import Form -->
-                <form action="{{ route('departments.import') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                <form action="{{ route('batches.import') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                     @csrf
 
                     <div>
@@ -36,7 +36,7 @@
                         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700">
                             🚀 Import
                         </button>
-                        <a href="{{ route('departments.index') }}" class="px-4 py-2 bg-gray-400 text-white rounded-lg shadow-md hover:bg-gray-500">
+                        <a href="{{ route('batches.index') }}" class="px-4 py-2 bg-gray-400 text-white rounded-lg shadow-md hover:bg-gray-500">
                             ❌ Cancel
                         </a>
                     </div>

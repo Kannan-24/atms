@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Batches;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\BatchesImport;
 
 class BatchesController extends Controller
 {
@@ -104,5 +106,23 @@ class BatchesController extends Controller
 
         return redirect()->route('batches.index')
             ->with('success', 'Batch deleted successfully.');
+    }
+    public function importForm()
+    {
+        return view('batches.import');
+    }
+
+    // Handle File Import
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt|max:2048',
+        ]);
+
+
+        // Process CSV Import
+        Excel::import(new BatchesImport, $request->file('file'));
+
+        return redirect()->route('batches.index')->with('success', 'Batches imported successfully!');
     }
 }

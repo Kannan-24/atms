@@ -10,6 +10,8 @@ use App\Models\Classes;
 use App\Models\Stop;
 use App\Models\UserStop;
 use Illuminate\Http\Request;
+use App\Imports\StudentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
@@ -189,4 +191,38 @@ class StudentController extends Controller
         return view('students.edit_stop', compact('student', 'stops', 'assignedStop'));
     }
 
+    
+    public function showImportForm()
+    {
+        $batches = Batches::all();
+        $departments = Department::all();
+        $classes = Classes::all();
+
+        if ($batches->isEmpty() || $departments->isEmpty() || $classes->isEmpty()) {
+            return redirect()->route('students.index')->with('error', 'Please add Batches, Departments, and Classes first!');
+        }
+
+        return view('students.import', compact('batches', 'departments', 'classes'));
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt,xlsx',
+            'batch_id' => 'required|exists:batches,id',
+            'dept_id' => 'required|exists:departments,id',
+            'class_id' => 'required|exists:classes,id',
+        ]);
+
+        try {
+            Excel::import(new StudentsImport($request->batch_id, $request->dept_id, $request->class_id), $request->file('file'));
+
+            return redirect()->route('students.index')
+                ->with('success', 'Students imported successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error importing students: ' . $e->getMessage());
+        }
+    }
+
 }
+

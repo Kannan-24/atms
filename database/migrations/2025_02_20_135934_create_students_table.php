@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('dob');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('batch_id');
+            $table->integer('dept_id');
             $table->timestamps();
         });
     }

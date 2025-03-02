@@ -3,32 +3,18 @@
 namespace App\Imports;
 
 use App\Models\Department;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class DepartmentsImport implements ToCollection
+class DepartmentsImport implements ToModel, WithHeadingRow
 {
-
-    public function collection(Collection $rows)
+    public function model(array $row)
     {
-        $rows->shift();
-
-        foreach ($rows as $row) {
-            $department = new Department();
-            $department->dept_name = $row[0];
-            $department->dept_code = $row[1];
-            $department->degree = $row[2];
-            $department->save();
-        }
-    }
-
-
-    public function rules(): array
-    {
-        return [
-            '0' => 'required',
-            '1' => 'required',
-            '2' => 'required',
-        ];
+        // Normalize headers (handle variations in capitalization or extra spaces)
+        return new Department([
+            'dept_name' => trim($row['dept_name'] ?? ''), // Prevent undefined key errors
+            'dept_code' => trim($row['dept_code'] ?? ''),
+            'degree' => trim($row['degree'] ?? ''),
+        ]);
     }
 }

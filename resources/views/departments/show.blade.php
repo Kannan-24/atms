@@ -31,6 +31,9 @@
                         <td>{{ $department->dept_name }}</td>
                     </tr>
                     <tr>
+                        <th class="text-lg font-semibold">Department Code</th>
+                        <td>{{ $department->dept_code }}</td>
+                    <tr>
                         <th class="text-lg font-semibold">Degree</th>
                         <td>{{ $department->degree }}</td>
                     </tr>

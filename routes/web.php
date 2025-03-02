@@ -40,13 +40,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('batches', BatchesController::class);
-    Route::resource('classes', ClassesController::class);
-    Route::resource('parents', ParentsController::class);
-    Route::resource('buses', BusController::class);
-    Route::resource('busroutes', RouteController::class);
-    Route::resource('stops', StopController::class);
-    Route::resource('reports', ReportController::class);
+
+    Route::get('/departments/import', [DepartmentController::class, 'importForm'])->name('departments.import.form');
+    Route::post('/departments/import', [DepartmentController::class, 'import'])->name('departments.import');
     Route::resource('departments', DepartmentController::class);
 
     //driver routes
@@ -65,6 +61,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/buses/{facultyIncharge}/remove', [BusController::class, 'removeFacultyIncharge'])->name('buses.removeFacultyIncharge');
 
     // student routes
+    Route::get('/students/import', [StudentController::class, 'showImportForm'])->name('students.import.form');
+    Route::post('/students/import', [StudentController::class, 'import'])->name('students.import');
     Route::resource('students', StudentController::class);
     Route::get('/students/{student}/assign-stops', [StudentController::class, 'assignStops'])->name('students.assignStops');
     Route::put('/students/{student}/assign-stops', [StudentController::class, 'updateAssignedStop'])->name('students.assignStops.update');
@@ -80,9 +78,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/busroutes/{route}/assignStops', [RouteController::class, 'assignStops'])->name('busroutes.assignStops');
     Route::post('/busroutes/{route}/storeAssignedStops', [RouteController::class, 'storeAssignedStops'])->name('busroutes.storeAssignedStops');
 
+    // Batch Routes
+    Route::get('/batches/import', [BatchesController::class, 'importForm'])->name('batches.import.form');
+    Route::post('/batches/import', [BatchesController::class, 'import'])->name('batches.import');
 
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/attendance/{bus_id}', [AttendanceController::class, 'show'])->name('attendance.show');
+
+
+    Route::resource('batches', BatchesController::class);
+    Route::resource('classes', ClassesController::class);
+    Route::resource('parents', ParentsController::class);
+    Route::resource('buses', BusController::class);
+    Route::resource('busroutes', RouteController::class);
+    Route::resource('stops', StopController::class);
+    Route::resource('reports', ReportController::class);
 });
 
 
