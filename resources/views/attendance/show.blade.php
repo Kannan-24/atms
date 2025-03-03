@@ -22,15 +22,15 @@
                     <tbody>
                         @foreach ($bus->students as $student)
                             <tr class="border border-gray-300">
-                                <td class="border border-gray-300 px-4 py-2">{{ $student->name }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $student->user->name }}</td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    {{ optional($student->attendance->first())->check_in ?? 'N/A' }}
+                                    {{ $student->attendance ? $student->attendance->first()->check_in : 'N/A' }}
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    {{ optional($student->attendance->first())->check_out ?? 'N/A' }}
+                                    {{ $student->attendance ? $student->attendance->first()->check_out : 'N/A' }}
                                 </td>
                                 <td class="border border-gray-300 px-4 py-2">
-                                    {{ optional($student->attendance->first())->status ?? 'Absent' }}
+                                    {{ $student->attendance ? $student->attendance->first()->status : 'N/A' }}
                                 </td>
                             </tr>
                         @endforeach

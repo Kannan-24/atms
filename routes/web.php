@@ -45,6 +45,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/departments/import', [DepartmentController::class, 'import'])->name('departments.import');
     
     //driver routes
+    Route::get('/buses/{bus}/assign-route', [BusController::class, 'assignRouteForm'])->name('buses.assignrouteform');
+    Route::post('/buses/{bus}/assign-route', [BusController::class, 'assignRoute'])->name('buses.assignRoute');
     Route::get('/buses/{bus}/assign-driver', [BusController::class, 'assignDriverForm'])->name('buses.assigndriverform');
     Route::post('/buses/{bus}/assign-driver', [BusController::class, 'assignDriver'])->name('buses.assignDriver');
     Route::patch('/buses/update-driver-validity/{busDriver}', [BusController::class, 'updateDriverValidity'])->name('buses.updateDriverValidity');

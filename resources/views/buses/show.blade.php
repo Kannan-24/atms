@@ -36,6 +36,18 @@
                                 Driver Assigned
                             </button>
                         @endif
+
+                        @if (!$bus->route)
+                            <a href="{{ route('buses.assignrouteform', $bus->id) }}">
+                                <button class="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-700">
+                                    Assign Route
+                                </button>
+                            </a>
+                        @else
+                            <button class="px-4 py-2 text-gray-500 bg-gray-300 rounded cursor-not-allowed" disabled>
+                                Route Assigned
+                            </button>
+                        @endif
                     </div>
                 </div>
                 <hr class="my-4">
@@ -51,6 +63,10 @@
                     <tr>
                         <th class="text-lg font-semibold">Capacity</th>
                         <td>{{ $bus->no_of_seats }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-lg font-semibold">Assigned Route</th>
+                        <td>{{ $bus->route ? $bus->route->route_name : 'No route assigned' }}</td>
                     </tr>
                 </table>
             </div>

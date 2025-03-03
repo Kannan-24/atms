@@ -40,6 +40,10 @@ class Bus extends Model
 
     public function getStudentsAttribute()
     {
+        if (!$this->route) {
+            return collect();
+        }
+
         $stops = $this->route->stops;
 
         return Student::with('stop')->whereHas('stop', function ($query) use ($stops) {

@@ -9,6 +9,7 @@ use App\Models\Driver;
 use App\Models\Faculty;
 use App\Models\BusIncharge;
 use App\Models\BusLocation;
+use App\Models\BusRoute;
 use App\Models\Route;
 use App\Models\RouteStop;
 use App\Models\Stop;
@@ -353,5 +354,31 @@ class BusController extends Controller
         }
 
         return null;
+    }
+
+    /**
+     * Show the form for assigning a route to a bus.
+     */
+    public function assignRouteForm(Bus $bus)
+    {
+        $routes = Route::all();
+        return view('buses.assignroute', compact('bus', 'routes'));
+    }
+
+    /**
+     * Assign a route to a bus.
+     */
+    public function assignRoute(Request $request, Bus $bus)
+    {
+        $request->validate([
+            'route_id' => 'required|exists:routes,id',
+        ]);
+
+        $busRoute = BusRoute::updateOrCreate(
+            ['bus_id' => $bus->id],
+            ['route_id' => $request->route_id]
+        );
+
+        return redirect()->route('buses.show', $bus->id)->with('success', 'Route assigned successfully.');
     }
 }

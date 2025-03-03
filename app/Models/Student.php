@@ -56,4 +56,9 @@ class Student extends Model
     {
         return $this->hasOneThrough(Stop::class, UserStop::class, 'user_id', 'id', 'user_id', 'stop_id');
     }
+
+    public function busAttendance()
+    {
+        return $this->hasMany(Attendance::class, 'user_id', 'user_id');
+    }
 }
