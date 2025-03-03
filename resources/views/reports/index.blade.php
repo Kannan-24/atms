@@ -10,7 +10,8 @@
             <div class="overflow-hidden bg-white rounded-lg shadow-xl p-6">
                 <h2 class="text-xl font-semibold mb-4">Attendance Report</h2>
 
-                <a href="{{ route('reports.pdf') }}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+                <a href="{{ route('reports.pdf') }}"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
                     Download PDF
                 </a>
 
@@ -28,11 +29,13 @@
                         @foreach ($attendances as $attendance)
                             <tr class="border-b hover:bg-indigo-50">
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->student->user->name }}</td>
+                                <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->student->user->name }}
+                                </td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->bus->bus_number }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->check_in ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">
-                                    <span class="px-2 py-1 rounded 
+                                    <span
+                                        class="px-2 py-1 rounded 
                                         {{ $attendance->status === 'Present' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
                                         {{ $attendance->status }}
                                     </span>
