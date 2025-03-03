@@ -34,14 +34,8 @@ class ReportController extends Controller
      */
     public function generateBusPDF($busId)
     {
-        $bus = Bus::with(['route', 'facultyIncharge.faculty'])->findOrFail($busId);
-        $attendances = Attendance::with('student.user')->where('bus_id', $busId)->get();
-
-        if ($attendances->isEmpty()) {
-            return redirect()->route('reports.index')->with('error', 'No attendance records found for this bus.');
-        }
-
-        $pdf = Pdf::loadView('reports.bus_pdf', compact('bus', 'attendances'));
-        return $pdf->download('attendance_report_bus_' . $bus->bus_number . '.pdf');
+        $bus = Bus::findOrFail($busId);
+        $pdf = PDF::loadView('reports.bus_pdf', compact('bus'));
+        return $pdf->download('bus_report.pdf');
     }
 }
