@@ -2,64 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\report;
 use Illuminate\Http\Request;
+use App\Models\Attendance;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('reports.index');
+        // Fetch all attendance records
+        $attendances = Attendance::with('student.user', 'bus')->get();
+
+        return view('reports.index', compact('attendances'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function generatePDF()
     {
-        //
-    }
+        // Fetch attendance records
+        $attendances = Attendance::with('student.user', 'bus')->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Load view and pass data
+        $pdf = Pdf::loadView('reports.pdf', compact('attendances'));
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(report $report)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(report $report)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, report $report)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(report $report)
-    {
-        //
+        // Download the generated PDF
+        return $pdf->download('attendance_report.pdf');
     }
 }

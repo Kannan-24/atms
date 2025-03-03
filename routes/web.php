@@ -70,6 +70,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/locations/{busId}', [BusController::class, 'locations'])->name('locations');
     Route::get('/track-buses', [BusController::class, 'trackBuses'])->name('track-buses.index');
     Route::get('/track-bus/{bus}', [BusController::class, 'track'])->name('trackBus.track');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/pdf', [ReportController::class, 'generatePDF'])->name('reports.pdf');
     
     
     // Route Stops
