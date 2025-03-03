@@ -24,10 +24,9 @@ class ReportController extends Controller
      */
     public function showBusReport($busId)
     {
-        $bus = Bus::with(['route', 'facultyIncharge.faculty'])->findOrFail($busId);
-        $attendances = Attendance::with('student.user')->where('bus_id', $busId)->get();
 
-        return view('reports.show', compact('bus', 'attendances'));
+        $bus = Bus::findOrFail($busId);
+        return view('reports.show');
     }
 
     /**
