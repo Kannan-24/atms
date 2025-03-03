@@ -26,7 +26,7 @@ class ReportController extends Controller
     {
 
         $bus = Bus::findOrFail($busId);
-        return view('reports.show');
+        return view('reports.show', compact('bus'));
     }
 
     /**
