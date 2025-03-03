@@ -3,48 +3,41 @@
         Attendance Reports - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
+    <!-- Main Content Section -->
     <div class="py-6 mt-20 ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
+
             <x-bread-crumb-navigation />
 
-            <div class="overflow-hidden bg-white rounded-lg shadow-xl p-6">
-                <h2 class="text-xl font-semibold mb-4">Attendance Report</h2>
-
-                <a href="{{ route('reports.pdf') }}"
-                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
-                    Download PDF
-                </a>
-
-                <table class="min-w-full mt-4 text-left border-collapse table-auto">
-                    <thead>
-                        <tr class="text-sm text-gray-600 bg-indigo-100">
-                            <th class="px-6 py-4 border-b-2 border-gray-200">#</th>
-                            <th class="px-6 py-4 border-b-2 border-gray-200">Student Name</th>
-                            <th class="px-6 py-4 border-b-2 border-gray-200">Bus</th>
-                            <th class="px-6 py-4 border-b-2 border-gray-200">Check-in</th>
-                            <th class="px-6 py-4 border-b-2 border-gray-200">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm text-gray-700">
-                        @foreach ($attendances as $attendance)
-                            <tr class="border-b hover:bg-indigo-50">
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->student->user->name }}
-                                </td>
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->bus->bus_number }}</td>
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $attendance->check_in ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 border-b border-gray-200">
-                                    <span
-                                        class="px-2 py-1 rounded 
-                                        {{ $attendance->status === 'Present' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
-                                        {{ $attendance->status }}
-                                    </span>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="bg-white p-4 rounded-2xl">
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($buses as $bus)
+                        <div
+                            class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                            <div class="p-6">
+                                <h2 class="text-lg font-semibold text-white">{{ $bus->number }}</h2>
+                                <p class="text-sm text-gray-200">{{ $bus->driver->user->name ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-200">{{ $bus->no_of_seats }}</p>
+                                <div class="mt-4">
+                                    <a href="{{ route('reports.bus.pdf', $bus->id) }}"
+                                        class="inline-block px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md shadow-md hover:bg-gray-100">
+                                        Download Report
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="absolute top-0 right-0 p-3">
+                                <span
+                                    class="inline-block px-3 py-1 text-xs font-semibold text-white bg-black bg-opacity-30 rounded-full">
+                                    {{ $loop->iteration }}
+                                </span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <x-pagination :paginator="$buses" />
             </div>
+
         </div>
     </div>
+
 </x-app-layout>

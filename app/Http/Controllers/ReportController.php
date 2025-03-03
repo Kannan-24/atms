@@ -3,26 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bus;
 use App\Models\Attendance;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
+    // Show all buses for report selection
     public function index()
     {
-        $attendances = Attendance::get();
-        return view('reports.index', compact('attendances'));
+        $buses = Bus::paginate(10); // Adjust the number 10 to the desired number of items per page
+        return view('reports.index', compact('buses'));
     }
 
-    public function generatePDF()
+    // Generate PDF report for a specific bus
+    public function generateBusReport($busId)
     {
-        // Fetch attendance records
-        $attendances = Attendance::get();
+        $bus = Bus::findOrFail($busId);
+        $attendances = Attendance::with('student.user')->where('bus_id', $busId)->get();
 
-        // Load view and pass data
-        $pdf = Pdf::loadView('reports.pdf', compact('attendances'));
+        if ($attendances->isEmpty()) {
+            return redirect()->route('reports.index')->with('error', 'No attendance records found for this bus.');
+        }
 
-        // Download the generated PDF
-        return $pdf->download('attendance_report.pdf');
+        $pdf = Pdf::loadView('reports.bus_pdf', compact('bus', 'attendances'));
+
+        return $pdf->download('attendance_report_bus_' . $bus->bus_number . '.pdf');
     }
 }
