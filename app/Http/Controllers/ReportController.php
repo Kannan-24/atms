@@ -10,16 +10,14 @@ class ReportController extends Controller
 {
     public function index()
     {
-        // Fetch all attendance records
-        $attendances = Attendance::with('student.user', 'bus')->get();
-
+        $attendances = Attendance::get();
         return view('reports.index', compact('attendances'));
     }
 
     public function generatePDF()
     {
         // Fetch attendance records
-        $attendances = Attendance::with('student.user', 'bus')->get();
+        $attendances = Attendance::get();
 
         // Load view and pass data
         $pdf = Pdf::loadView('reports.pdf', compact('attendances'));
