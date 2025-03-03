@@ -31,6 +31,7 @@
                     <tbody class="text-sm text-gray-700">
                         @foreach ($bus->students as $student)
                             @php
+                                $busAttendance = $student->busAttendance ? $student->busAttendance->first() : null;
                                 $status = $busAttendance ? $busAttendance->status : 'N/A';
                             @endphp
                             <tr class="border-b hover:bg-indigo-50">
