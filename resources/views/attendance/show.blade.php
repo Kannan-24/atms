@@ -25,9 +25,9 @@
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->busAttendance ? $student->busAttendance->first()->check_in : 'N/A' }}
                                     </td>
-                                    <td class="px-6 py-4 border-b border-gray-200">
+                                    {{-- <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->busAttendance ? $student->busAttendance->first()->check_out : 'N/A' }}
-                                    </td>
+                                    </td> --}}
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->busAttendance ? $student->busAttendance->first()->status : 'N/A' }}
                                     </td>
