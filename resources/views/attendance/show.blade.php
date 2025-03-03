@@ -21,17 +21,18 @@
                         </thead>
                         <tbody class="text-sm text-gray-700">
                             @foreach ($bus->students as $student)
-                                <tr class="border-b hover:bg-indigo-50">
+                                @php
+                                    $status = $student->busAttendance ? $student->busAttendance->first()->status : 'N/A';
+                                    $rowClass = $status === 'Absent' ? 'bg-red-200 text-red-800' : ($status === 'Present' ? 'bg-green-200 text-green-800' : '');
+                                @endphp
+                                <tr class="border-b {{ $rowClass }} !important">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->busAttendance ? $student->busAttendance->first()->check_in : 'N/A' }}
                                     </td>
-                                    {{-- <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->busAttendance ? $student->busAttendance->first()->check_out : 'N/A' }}
-                                    </td> --}}
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->busAttendance ? $student->busAttendance->first()->status : 'N/A' }}
+                                        {{ $status }}
                                     </td>
                                 </tr>
                             @endforeach
