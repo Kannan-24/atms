@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bus;
 use App\Models\Attendance;
+use App\Models\Route;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
@@ -23,16 +24,14 @@ class ReportController extends Controller
      */
     public function showBusReport($busId)
     {
-        $bus = Bus::with('students.user')->findOrFail($busId);
+
+        $bus = Bus::findOrFail($busId);
         return view('reports.show', compact('bus'));
     }
 
-    /**
-     * Generate PDF report for a specific bus.
-     */
     public function generateBusPDF($busId)
     {
-        $bus = Bus::with('students.user')->findOrFail($busId);
+        $bus = Bus::findOrFail($busId);
 
         $pdf = Pdf::loadView('reports.bus_pdf', compact('bus'));
 
