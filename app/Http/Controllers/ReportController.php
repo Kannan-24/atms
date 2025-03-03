@@ -12,7 +12,7 @@ class ReportController extends Controller
     // Step 1: Show the list of buses to generate reports
     public function index()
     {
-        $buses = Bus::all();
+        $buses = Bus::paginate(10); // Adjust the number 10 to the desired number of items per page
         return view('reports.index', compact('buses'));
     }
 
