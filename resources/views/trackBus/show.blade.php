@@ -5,7 +5,8 @@
 
     <div class="mt-20 ml-4 py-9 sm:ml-64 sm:me-4 lg:me-0">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="mb-6">
+            
+             <div class="mb-6">
                 <nav class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md">
                     <ol class="inline-flex items-center space-x-2">
                         <li><a href="{{ route('dashboard') }}" class="font-medium text-blue-800 hover:text-blue-900">Dashboard</a></li>
@@ -25,6 +26,80 @@
                         </li>
                     </ol>
                 </nav>
+            </div>
+
+            <div class="p-6 mb-6 rounded-lg shadow-md bg-white">
+                <h2 class="text-xl font-semibold text-blue-900 ">Bus Details</h2>
+                <table class="w-1/3 text-left">
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 text-gray-600">Bus Number:</td>
+                            <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $bus->number }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 text-gray-600">Plate Number:</td>
+                            <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $bus->number_plate }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 text-gray-600">Capacity:</td>
+                            <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{ $bus->no_of_seats }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h2 class="text-xl font-semibold text-blue-900 mt-2 ">Driver Details</h2>
+                <table class="w-1/3 text-left">
+                    <tbody>
+                        @if ($bus->busDriver)
+                            <tr>
+                                <td class="py-2 px-4 text-gray-600">Driver Name:</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->busDriver->driver->user->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 text-gray-600">Driver Phone:</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->busDriver->driver->user->phone }}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td colspan="2" class="py-2 px-4">
+                                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg"
+                                        role="alert">
+                                        <p class="font-bold">Notice</p>
+                                        <p>Driver is not assigned</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+                <h2 class="text-xl font-semibold text-blue-900 mt-2">Bus Incharge Details</h2>
+                <table class="w-1/3 text-left">
+                    <tbody>
+                        @if ($bus->facultyIncharge)
+                            <tr>
+                                <td class="py-2 px-4 text-gray-600">Incharge Name:</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->facultyIncharge->faculty->user->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 text-gray-600">Incharge Phone:</td>
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{  $bus->facultyIncharge->faculty->user->phone }}
+                                </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td colspan="2" class="py-2 px-4">
+                                    <div class="p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg"
+                                        role="alert">
+                                        <p class="font-bold">Notice</p>
+                                        <p>Incharge is not assigned</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
             </div>
 
             <!-- Live Bus Tracking -->
