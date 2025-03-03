@@ -15,7 +15,6 @@
                             <tr class="text-sm text-gray-600 bg-indigo-100">
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Student Name</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Check-in</th>
-                                <th class="px-6 py-4 border-b-2 border-gray-200">Check-out</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Status</th>
                             </tr>
                         </thead>
@@ -25,9 +24,6 @@
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->attendance ? $student->attendance->first()->check_in : 'N/A' }}
-                                    </td>
-                                    <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->attendance ? $student->attendance->first()->check_out : 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->attendance ? $student->attendance->first()->status : 'N/A' }}
