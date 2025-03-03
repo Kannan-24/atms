@@ -16,12 +16,12 @@
                             class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-lg transition-transform transform hover:scale-105">
                             <div class="p-6">
                                 <h2 class="text-lg font-semibold text-white">{{ $bus->number }}</h2>
-                                <p class="text-sm text-gray-200">{{ $bus->driver->user->name ?? 'N/A' }}</p>
-                                <p class="text-sm text-gray-200">{{ $bus->no_of_seats }}</p>
+                                <p class="text-sm text-gray-200">{{ $bus->user->name ?? 'N/A' }}</p>
+                                <p class="text-sm text-gray-200">Capacity: {{ $bus->no_of_seats }}</p>
                                 <div class="mt-4">
-                                    <a href="{{ route('reports.bus.pdf', $bus->id) }}"
+                                    <a href="{{ route('reports.bus.show', $bus->id) }}"
                                         class="inline-block px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md shadow-md hover:bg-gray-100">
-                                        Download Report
+                                        View Report
                                     </a>
                                 </div>
                             </div>
