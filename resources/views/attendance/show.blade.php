@@ -21,7 +21,7 @@
                         </thead>
                         <tbody class="text-sm text-gray-700">
                             @foreach ($bus->students as $student)
-                                <tr class="border-b hover:bg-indigo-50">
+                                <tr class="border-b hover:bg-indigo-50 {{ $student->busAttendance && $student->busAttendance->first()->status == 'present' ? 'bg-green-100' : '' }}">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
