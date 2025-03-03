@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance Report - Bus {{ $bus->bus_number }}</title>
+    <title>Attendance Report - Bus {{ $bus->number }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -73,35 +73,35 @@
 <body>
 
     <div class="header">
-        <h2>Attendance Report - Bus {{ $bus->bus_number }}</h2>
+        <h2>Attendance Report - Bus {{ $bus->number }}</h2>
     </div>
 
-    @if ($attendances->isEmpty())
-        <p class="no-data">No attendance records available for this bus.</p>
-    @else
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Student Name</th>
+                <th>Check-in Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($bus->students as $student)
+                @php
+                    $busAttendance = $student->busAttendance ? $student->busAttendance->first() : null;
+                    $status = $busAttendance ? $busAttendance->status : 'N/A';
+                @endphp
                 <tr>
-                    <th>#</th>
-                    <th>Student Name</th>
-                    <th>Check-in Time</th>
-                    <th>Status</th>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $student->user->name ?? 'N/A' }}</td>
+                    <td>{{ $busAttendance ? $busAttendance->check_in : 'N/A' }}</td>
+                    <td class="{{ $status === 'Present' ? 'status-present' : 'status-absent' }}">
+                        {{ $status }}
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($attendances as $attendance)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $attendance->student->user->name ?? 'N/A' }}</td>
-                        <td>{{ $attendance->check_in ?? 'N/A' }}</td>
-                        <td class="{{ $attendance->status === 'Present' ? 'status-present' : 'status-absent' }}">
-                            {{ $attendance->status ?? 'N/A' }}
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
+            @endforeach
+        </tbody>
+    </table>
 
 </body>
 
