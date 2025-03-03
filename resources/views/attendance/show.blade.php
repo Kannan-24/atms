@@ -23,10 +23,13 @@
                                 <tr class="border-b hover:bg-indigo-50">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->attendance ? $student->attendance->first()->check_in : 'N/A' }}
+                                        {{ $student->busAttendance ? $student->busAttendance->first()->check_in : 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->attendance ? $student->attendance->first()->status : 'N/A' }}
+                                        {{ $student->busAttendance ? $student->busAttendance->first()->check_out : 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4 border-b border-gray-200">
+                                        {{ $student->busAttendance ? $student->busAttendance->first()->status : 'N/A' }}
                                     </td>
                                 </tr>
                             @endforeach
