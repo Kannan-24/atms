@@ -10,7 +10,8 @@
             <div class="overflow-hidden bg-white rounded-lg shadow-xl p-6">
                 <div class="flex justify-between items-center">
 
-                    <h2 class="text-xl font-semibold mb-4">Attendance Report - Bus {{ $bus->number }}</h2>
+                    <h2 class="text-xl font-semibold mb-4">Attendance Report - Bus {{ $bus->number }} -
+                        {{ $bus->route->route_name ?? 'N/A' }}</h2>
 
                     <a href="{{ route('reports.bus.pdf', $bus->id) }}"
                         class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
@@ -36,7 +37,7 @@
                                     {{ $student->busAttendance && $student->busAttendance->first() ? $student->busAttendance->first()->check_in : 'N/A' }}
                                 </td>
                                 <td class="px-6 py-4 border-b border-gray-200">
-                                    {{ $student->busAttendance && $student->busAttendance->first() ? $student->busAttendance->first()->status : 'N/A' }}
+                                    {{ $status }}
                                 </td>
                             </tr>
                         @endforeach
