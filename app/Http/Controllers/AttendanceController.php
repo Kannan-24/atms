@@ -13,7 +13,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $buses = Bus::all();
+        $buses = Bus::paginate(10); // Adjust the number 10 to the desired number of items per page
         return view('attendance.index', compact('buses'));
     }
 

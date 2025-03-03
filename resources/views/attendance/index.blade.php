@@ -3,42 +3,41 @@
         {{ __('Bus Attendance') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
+    <!-- Main Content Section -->
     <div class="py-6 mt-20 ml-4 sm:ml-64">
-        <div class="w-full max-w-4xl px-6 mx-auto">
+        <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
             <x-bread-crumb-navigation />
 
-            <div class="p-8 bg-white border border-gray-200 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold mb-4">Bus Attendance Records</h2>
+            <div class="bg-white p-4 rounded-2xl">
 
-                <table class="w-full border-collapse border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="border border-gray-300 px-4 py-2 text-left">Bus Number</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Total Students</th>
-                            <th class="border border-gray-300 px-4 py-2 text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($buses as $bus)
-                            <tr class="border border-gray-300">
-                                <td class="border border-gray-300 px-4 py-2">{{ $bus->number }}</td>
-                                <td class="border border-gray-300 px-4 py-2">{{ $bus->students ? $bus->students->count() : 0 }}</td>
-                                <td class="border border-gray-300 px-4 py-2">
-                                    <a href="{{ route('attendance.show', $bus->id) }}"
-                                       class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
-                                        View Attendance
-                                    </a>
-                                    {{-- Put Attendance --}}
-                                    <a href="{{ route('attendance.create', $bus) }}"
-                                       class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
-                                        Put Attendance
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($buses as $bus)
+                    <div class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <div class="p-6">
+                            <h2 class="text-lg font-semibold text-white">Bus Number: {{ $bus->number }}</h2>
+                            <p class="text-white">Total Students: {{ $bus->students ? $bus->students->count() : 0 }}</p>
+                            <div class="mt-4">
+                                <a href="{{ route('attendance.show', $bus->id) }}" 
+                                    class="inline-block px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md shadow-md hover:bg-gray-100">
+                                    View Attendance
+                                </a>
+                                {{-- <a href="{{ route('attendance.create', $bus) }}" 
+                                    class="inline-block px-4 py-2 text-sm font-medium text-green-600 bg-white rounded-md shadow-md hover:bg-gray-100">
+                                    Put Attendance
+                                </a> --}}
+                            </div>
+                        </div>
+                        <div class="absolute top-0 right-0 p-3">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold text-white bg-black bg-opacity-30 rounded-full">
+                                {{ $loop->iteration }}
+                            </span>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <x-pagination :paginator="$buses" />
             </div>
         </div>
     </div>
+
 </x-app-layout>
