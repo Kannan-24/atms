@@ -1,81 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attendance Report - Bus {{ $bus->number }}</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            padding: 0;
         }
-
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
-
-        .header h2 {
-            color: #333;
-            font-size: 22px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
         }
-
+        .header h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .date {
+            text-align: right;
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #555;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
-
-        th,
-        td {
+        th, td {
             border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
             font-size: 14px;
         }
-
         th {
             background-color: #4CAF50;
             color: white;
             text-align: center;
         }
-
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-
         .status-present {
             background-color: #d4edda;
             color: #155724;
             font-weight: bold;
             text-align: center;
         }
-
         .status-absent {
             background-color: #f8d7da;
             color: #721c24;
             font-weight: bold;
             text-align: center;
         }
-
-        .no-data {
+        .footer {
+            margin-top: 30px;
             text-align: center;
-            color: red;
+            font-size: 14px;
+            color: #555;
+        }
+        .signature {
+            margin-top: 40px;
+            text-align: right;
             font-size: 16px;
-            margin-top: 20px;
         }
     </style>
 </head>
-
 <body>
 
+    <!-- HEADER -->
     <div class="header">
-        <h2>Attendance Report - Bus {{ $bus->number }}</h2>
+        <h1>College Name Here</h1>
+        <h3>Bus Attendance Report</h3>
+        <h3>Bus Number: {{ $bus->number }}</h3>
+        <h3>Route: {{ $bus->route->route_name ?? 'N/A' }}</h3>
     </div>
 
+    <div class="date">
+        Date: {{ now()->format('d-m-Y') }}
+    </div>
+
+    <!-- TABLE -->
     <table>
         <thead>
             <tr>
@@ -103,6 +115,11 @@
         </tbody>
     </table>
 
-</body>
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>Generated on {{ now()->format('d-m-Y h:i A') }}</p>
+        <p>Automated Transport Management System (ATMS)</p>
+    </div>
 
+</body>
 </html>
