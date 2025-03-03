@@ -19,7 +19,7 @@ class ReportController extends Controller
     // Step 2: Show report details after clicking a bus
     public function showBusReport($busId)
     {
-        $bus = Bus::findOrFail($busId);
+        $bus = Bus::with('students.user', 'students.busAttendance')->findOrFail($busId);
         $attendances = Attendance::with('student.user')->where('bus_id', $busId)->get();
 
         return view('reports.show', compact('bus', 'attendances'));
@@ -28,7 +28,7 @@ class ReportController extends Controller
     // Step 3: Generate PDF for the selected bus
     public function generateBusPDF($busId)
     {
-        $bus = Bus::findOrFail($busId);
+        $bus = Bus::with('students.user', 'students.busAttendance')->findOrFail($busId);
         $attendances = Attendance::with('student.user')->where('bus_id', $busId)->get();
 
         $pdf = Pdf::loadView('reports.bus_pdf', compact('bus', 'attendances'));
