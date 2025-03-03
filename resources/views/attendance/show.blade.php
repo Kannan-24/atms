@@ -13,6 +13,7 @@
                     <table class="min-w-full text-left border-collapse table-auto">
                         <thead>
                             <tr class="text-sm text-gray-600 bg-indigo-100">
+                                <th class="px-6 py-4 border-b-2 border-gray-200">#</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Student Name</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Check-in</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Status</th>
@@ -21,6 +22,7 @@
                         <tbody class="text-sm text-gray-700">
                             @foreach ($bus->students as $student)
                                 <tr class="border-b hover:bg-indigo-50">
+                                    <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->busAttendance ? $student->busAttendance->first()->check_in : 'N/A' }}
