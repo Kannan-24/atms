@@ -110,8 +110,9 @@
         </div>
     </div>
 
-    <script>
+   <script>
         let map, markers = [], busPath = null, latestMarker = null;
+        let followBus = true; // Auto-focus on bus when moving
 
         async function initMap() {
             const { Map } = await google.maps.importLibrary("maps");
@@ -128,6 +129,9 @@
 
             fetchBusLocations({{ $bus->id }});
             setInterval(() => fetchBusLocations({{ $bus->id }}), 10000);
+
+            // Detect user panning & disable auto-follow
+            map.addListener("dragstart", () => { followBus = false; });
         }
 
         async function fetchBusLocations(busId) {
@@ -151,9 +155,10 @@
             const busLocations = buses[{{ $bus->id }}].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             const latestLocation = busLocations[0];
 
-            // Set Map Center to Latest Location
-            map.setCenter({ lat: latestLocation.latitude, lng: latestLocation.longitude });
-            map.setZoom(16);
+            // Auto-center on bus if followBus is enabled
+            if (followBus) {
+                map.panTo({ lat: latestLocation.latitude, lng: latestLocation.longitude });
+            }
 
             // Custom Bus Icon
             if (latestMarker) latestMarker.setMap(null);
@@ -164,12 +169,13 @@
                 icon: {
                     url: "https://maps.google.com/mapfiles/kml/shapes/bus.png",
                     scaledSize: new google.maps.Size(50, 50)
-                }
+                },
+                animation: google.maps.Animation.DROP // Smooth animation effect
             });
 
             markers.push(latestMarker);
 
-            // Draw Route Path with Color Fading
+            // Draw Route Path with Gradient Effect
             const routeCoordinates = busLocations.map(loc => ({ lat: loc.latitude, lng: loc.longitude }));
             busPath = new google.maps.Polyline({
                 path: routeCoordinates,
