@@ -70,6 +70,7 @@
             margin-right: 20pt;
             font-size: 10pt;
             text-align: right;
+            margin-bottom: 10pt;
         }
     </style>
     @stack('styles')
@@ -79,7 +80,7 @@
 <body>
 
     <header>
-        <img src="{{ public_path('\assets\logo.png') }}" alt="ADAAT Logo">
+        <img src="{{ public_path('assets/logo.png') }}" alt="Logo">
         <h1>Automated Transport Management System</h1>
         <hr>
     </header>

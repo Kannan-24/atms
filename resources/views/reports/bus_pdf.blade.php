@@ -1,4 +1,4 @@
-<x-pdf-portrait-layout>
+<x-pdf-portrait>
     @push('styles')
         <style>
             body {
@@ -78,4 +78,4 @@
             @endforeach
         </tbody>
     </table>
-</x-pdf-portrait-layout>
+</x-pdf-portrait>
