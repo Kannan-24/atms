@@ -313,18 +313,39 @@ class BusController extends Controller
                 return response()->json(['error' => 'No route found for the stop.'], 404);
             }
 
-            $attendance = Attendance::create([
-                'user_id' => $userId->user_id,
-                'check_in' => now(),
-                'check_in_stop_id' => $stop->id,
-                'check_in_latitude' => (float) $request->latitude,
-                'check_in_longitude' => (float) $request->longitude,
-                'towards_college' => true,
-                'status' => 'Present',
-                'bus_id' => $request->bus_id,
-                'route_id' => $route->id,
-                'distance_traveled' => 0,
-            ]);
+            // Morning time check
+            $towardsCollege = now()->between(
+                now()->setHour(6)->setMinute(0)->setSecond(0),
+                now()->setHour(9)->setMinute(30)->setSecond(0)
+            ) ? true : false;
+
+            $attendance = Attendance::where('user_id', $userId->user_id)
+                ->whereDate('check_in', now())
+                ->where('bus_id', $request->bus_id)
+                ->where('route_id', $route->id)
+                ->first();
+
+            if ($attendance) {
+                $attendance->update([
+                    'check_out' => now(),
+                    'check_out_stop_id' => $stop->id,
+                    'check_out_latitude' => (float) $request->latitude,
+                    'check_out_longitude' => (float) $request->longitude,
+                ]);
+            } else {
+                $attendance = Attendance::create([
+                    'user_id' => $userId->user_id,
+                    'check_in' => now(),
+                    'check_in_stop_id' => $stop->id,
+                    'check_in_latitude' => (float) $request->latitude,
+                    'check_in_longitude' => (float) $request->longitude,
+                    'towards_college' => $towardsCollege,
+                    'status' => 'Present',
+                    'bus_id' => $request->bus_id,
+                    'route_id' => $route->id,
+                    'distance_traveled' => 0,
+                ]);
+            }
 
             return response()->json($attendance);
         } catch (\Exception $e) {
