@@ -51,16 +51,16 @@ class AccountSettingsController extends Controller
     /**
      * Delete the user's account.
      */
-        public function destroy(Request $request)
-        {
-            $request->validate([
-                'password' => ['required', 'current_password'],
-            ]);
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
 
-            $user = Auth::user();
-            Auth::logout();
-            $user->delete();
+        $user = Auth::user();
+        Auth::logout();
+        $user->delete();
 
-            return redirect('/')->with('status', 'account-deleted');
-        }
+        return redirect('/')->with('status', 'account-deleted');
+    }
 }

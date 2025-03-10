@@ -72,7 +72,10 @@ class RoleSeeder extends Seeder
             //report
             'view report',
 
-            //
+
+            //track bus
+            'track bus',
+            
 
 
         ];
