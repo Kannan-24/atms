@@ -44,7 +44,7 @@
     <section
         class="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 py-16 space-y-6 md:space-y-0">
         <!-- Left Content -->
-        <div class="md:w-1/2 space-y-6 text-justify md:text-left ml-11">
+        <div class="md:w-1/2 space-y-6 text-justify md:text-left lg:ml-11">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
                 Smart Transport, <span class="text-blue-500">Seamless Attendance.</span>
             </h1>
@@ -55,7 +55,7 @@
                     notifications</span>.
                 Ensure student safety, improve efficiency, and access detailed reports - all in one system.
             </p>
-            <button onclick="document.getElementById('features').scrollIntoView({ behavior: 'smooth' });"
+            <button onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' });"
                 class="bg-blue-500 text-white px-8 py-3 rounded-full shadow-lg hover:bg-blue-600 transition duration-300">
                 Explore ATMS
             </button>
