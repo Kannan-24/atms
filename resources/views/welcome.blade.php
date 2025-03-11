@@ -11,7 +11,7 @@
 <body class="bg-gradient-to-l from-blue-200 via-blue-200 to-blue-300">
 
     <nav
-        class="flex items-center justify-between p-4 bg-white bg-opacity-70 backdrop-blur-md shadow-md sticky top-0 z-50 transition duration-300 ease-in-out">
+        class="flex items-center justify-between p-4 bg-white bg-opacity-70 backdrop-blur-md shadow-md sticky top-0 z-50">
         <!-- Logo -->
         <div class="flex items-center space-x-2">
             <img src="{{ asset('assets/logo.png') }}" alt="ATMS Logo" class="w-10 h-10">
@@ -26,8 +26,8 @@
             </svg>
         </button>
 
-        <!-- Menu -->
-        <ul id="mobile-menu" class="hidden md:flex space-x-6 text-gray-600">
+        <!-- Desktop Menu -->
+        <ul class="hidden md:flex space-x-6 text-gray-600">
             <li><a href="#" class="hover:text-blue-500">Home</a></li>
             <li><a href="#about" class="hover:text-blue-500">About</a></li>
             <li><a href="#features" class="hover:text-blue-500">Features</a></li>
@@ -38,7 +38,24 @@
             class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 hidden md:block">
             Get Started
         </a>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="absolute top-16 left-0 w-full bg-white shadow-md hidden md:hidden">
+            <ul class="flex flex-col items-center py-4 space-y-4 text-gray-600">
+                <li><a href="#" class="hover:text-blue-500">Home</a></li>
+                <li><a href="#about" class="hover:text-blue-500">About</a></li>
+                <li><a href="#features" class="hover:text-blue-500">Features</a></li>
+                <li><a href="#team" class="hover:text-blue-500">Team</a></li>
+                <li>
+                    <a href="{{ route('login') }}"
+                        class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+                        Get Started
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
+
 
     <!-- Hero Section -->
     <section
@@ -173,7 +190,8 @@
                             <div
                                 class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
                                 <div class="flex items-center space-x-3">
-                                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Academic Management</h3>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Academic Management
+                                    </h3>
                                 </div>
                                 <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Seamless integration of academic schedules with transport operations.
@@ -307,7 +325,8 @@
                         <h3 class="text-2xl font-semibold text-gray-900">Guided By</h3>
                         <p class="text-blue-500 font-medium">Dr. SIVAKUMAR G</p>
                         <p class="text-gray-700 text-sm mt-3">
-                            Professor, Department of Computer Science & Engineering, providing expert guidance and support.
+                            Professor, Department of Computer Science & Engineering, providing expert guidance and
+                            support.
                         </p>
                     </div>
                 </div>
@@ -331,10 +350,11 @@
         <p>&copy; 2025 ATMS. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript for Mobile Menu Toggle -->
     <script>
-        // Toggle Mobile Menu
         document.getElementById('menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+            let mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
         });
     </script>
 
