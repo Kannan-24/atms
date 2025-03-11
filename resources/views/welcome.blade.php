@@ -44,7 +44,7 @@
     <section
         class="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 py-16 space-y-6 md:space-y-0">
         <!-- Left Content -->
-        <div class="md:w-1/2 space-y-6 text-justify md:text-left">
+        <div class="md:w-1/2 space-y-6 text-justify md:text-left ml-11">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
                 Smart Transport, <span class="text-blue-500">Seamless Attendance.</span>
             </h1>
