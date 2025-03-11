@@ -27,7 +27,7 @@
         </button>
 
         <!-- Menu -->
-        <ul id="menu" class="hidden md:flex space-x-6 text-gray-600">
+        <ul id="mobile-menu" class="hidden md:flex space-x-6 text-gray-600">
             <li><a href="#" class="hover:text-blue-500">Home</a></li>
             <li><a href="#about" class="hover:text-blue-500">About</a></li>
             <li><a href="#features" class="hover:text-blue-500">Features</a></li>
@@ -41,18 +41,19 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 py-16 ">
+    <section
+        class="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-10 py-16 space-y-6 md:space-y-0">
         <!-- Left Content -->
-        <div class="md:w-1/2 space-y-6 ml-12 text-center md:text-left">
-            <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">
+        <div class="md:w-1/2 space-y-6 text-justify md:text-left">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
                 Smart Transport, <span class="text-blue-500">Seamless Attendance.</span>
             </h1>
-            <p class="text-gray-700 text-lg leading-relaxed">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed">
                 ATMS revolutionizes college transportation with <span class="font-semibold">barcode-based attendance
                     tracking</span>,
                 <span class="font-semibold">real-time bus tracking</span>, and <span class="font-semibold">automated
                     notifications</span>.
-                Ensure student safety, improve efficiency, and access detailed reports—all in one system.
+                Ensure student safety, improve efficiency, and access detailed reports - all in one system.
             </p>
             <button onclick="document.getElementById('features').scrollIntoView({ behavior: 'smooth' });"
                 class="bg-blue-500 text-white px-8 py-3 rounded-full shadow-lg hover:bg-blue-600 transition duration-300">
@@ -63,7 +64,7 @@
         <!-- Right Image -->
         <div class="md:w-1/2 flex justify-center">
             <img src="{{ asset('assets/landing.svg') }}" alt="Transport Illustration"
-                class="w-full max-w-md md:max-w-lg transform hover:scale-105 transition duration-300">
+                class="w-full max-w-xs md:max-w-md transform hover:scale-105 transition duration-300">
         </div>
     </section>
 
@@ -135,7 +136,7 @@
     </section>
 
     <section id="features">
-        <div class="max-w-4xl mx-auto py-16">
+        <div class="max-w-4xl mx-auto py-16 px-6">
             <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Modules</h2>
 
             <div class="relative">
@@ -148,13 +149,13 @@
 
                     <!-- Timeline Card 1 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
-                        <div class="md:w-1/2 text-left pr-8">
+                        <div class="md:w-1/2 text-left md:pr-8">
                             <div
-                                class="bg-white border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                                class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
                                 <div class="flex items-center space-x-3">
-                                    <h3 class="text-2xl font-semibold text-gray-900">User Management</h3>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900">User Management</h3>
                                 </div>
-                                <p class="text-gray-600 mt-4 leading-relaxed">
+                                <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Manage roles and authentication for <span
                                         class="font-semibold text-gray-900">Admins, Faculty, Drivers, Students, and
                                         Parents</span>.
@@ -168,13 +169,13 @@
 
                     <!-- Timeline Card 2 -->
                     <div class="flex flex-col md:flex-row-reverse items-center md:items-start">
-                        <div class="md:w-1/2 text-left pl-8">
+                        <div class="md:w-1/2 text-left md:pl-8">
                             <div
-                                class="bg-white border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                                class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
                                 <div class="flex items-center space-x-3">
-                                    <h3 class="text-2xl font-semibold text-gray-900">Academic Management</h3>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Academic Management</h3>
                                 </div>
-                                <p class="text-gray-600 mt-4 leading-relaxed">
+                                <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Seamless integration of academic schedules with transport operations.
                                 </p>
                             </div>
@@ -186,11 +187,11 @@
 
                     <!-- Timeline Card 3 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
-                        <div class="md:w-1/2 text-left pr-8">
+                        <div class="md:w-1/2 text-left md:pr-8">
                             <div
-                                class="bg-white border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                                <h3 class="text-2xl font-semibold text-gray-900">Transport Management</h3>
-                                <p class="text-gray-600 mt-4 leading-relaxed">
+                                class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                                <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Transport Management</h3>
+                                <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Assign buses, manage routes, and optimize schedules efficiently.
                                 </p>
                             </div>
@@ -202,11 +203,11 @@
 
                     <!-- Timeline Card 4 -->
                     <div class="flex flex-col md:flex-row-reverse items-center md:items-start">
-                        <div class="md:w-1/2 text-left pl-8">
+                        <div class="md:w-1/2 text-left md:pl-8">
                             <div
-                                class="bg-white border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                                <h3 class="text-2xl font-semibold text-gray-900">Attendance Management</h3>
-                                <p class="text-gray-600 mt-4 leading-relaxed">
+                                class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                                <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Attendance Management</h3>
+                                <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Automate attendance tracking using <span
                                         class="font-semibold text-gray-900">barcode
                                         scanning</span> and real-time reports.
@@ -220,11 +221,11 @@
 
                     <!-- Timeline Card 5 -->
                     <div class="flex flex-col md:flex-row items-center md:items-start">
-                        <div class="md:w-1/2 text-left pr-8">
+                        <div class="md:w-1/2 text-left md:pr-8">
                             <div
-                                class="bg-white border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                                <h3 class="text-2xl font-semibold text-gray-900">Live Vehicle Tracking</h3>
-                                <p class="text-gray-600 mt-4 leading-relaxed">
+                                class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                                <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Live Vehicle Tracking</h3>
+                                <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Track bus locations in <span class="font-semibold text-gray-900">real-time</span>,
                                     ensuring safety and instant updates.
                                 </p>
@@ -237,11 +238,11 @@
 
                     <!-- Timeline Card 6 -->
                     <div class="flex flex-col md:flex-row-reverse items-center md:items-start">
-                        <div class="md:w-1/2 text-left pl-8">
+                        <div class="md:w-1/2 text-left md:pl-8">
                             <div
-                                class="bg-white border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
-                                <h3 class="text-2xl font-semibold text-gray-900">Reports & Analytics</h3>
-                                <p class="text-gray-600 mt-4 leading-relaxed">
+                                class="bg-white md:border-l-4 border-blue-500 shadow-lg rounded-xl p-6 w-full md:max-w-md transform transition duration-300 hover:shadow-xl hover:-translate-y-1">
+                                <h3 class="text-xl md:text-2xl font-semibold text-gray-900">Reports & Analytics</h3>
+                                <p class="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
                                     Generate <span class="font-semibold text-gray-900">detailed reports</span> on
                                     transport efficiency, attendance, and vehicle usage.
                                 </p>
@@ -259,9 +260,9 @@
 
     <section id="team" class="py-16 px-6 md:px-20">
         <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-4xl font-bold text-gray-900 leading-tight mb-8">Meet Our <span
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-8">Meet Our <span
                     class="text-blue-500">Team</span></h2>
-            <p class="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto mb-12">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-12">
                 Our team is dedicated to revolutionizing <strong>Automated Transport Management System (ATMS)</strong>
                 with innovation and efficiency.
             </p>
