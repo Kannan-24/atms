@@ -260,7 +260,7 @@
 
     <section id="team" class="py-16 px-6 md:px-20">
         <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-8">Meet Our <span
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-8">Our <span
                     class="text-blue-500">Team</span></h2>
             <p class="text-gray-700 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-12">
                 Our team is dedicated to revolutionizing <strong>Automated Transport Management System (ATMS)</strong>
@@ -300,13 +300,29 @@
             </div>
 
             <!-- Guide Section -->
-            <div class="mt-12 bg-white p-6 rounded-lg shadow-md mx-auto max-w-3xl">
-                <h3 class="text-2xl font-semibold text-gray-900">Guided By</h3>
-                <p class="text-blue-500 font-medium">Dr. SIVAKUMAR G</p>
-                <p class="text-gray-700 text-sm mt-3">
-                    Professor, Department of Computer Science & Engineering, providing expert guidance and support.
-                </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-10 mt-12">
+                <div class="flex flex-col justify-center items-center h-full">
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full max-w-3xl h-full flex flex-col justify-center">
+                        <h3 class="text-2xl font-semibold text-gray-900">Guided By</h3>
+                        <p class="text-blue-500 font-medium">Dr. SIVAKUMAR G</p>
+                        <p class="text-gray-700 text-sm mt-3">
+                            Professor, Department of Computer Science & Engineering, providing expert guidance and support.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center items-center h-full">
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md w-full max-w-3xl h-full flex flex-col justify-center">
+                        <h3 class="text-2xl font-semibold text-gray-900">Coordinated By</h3>
+                        <p class="text-blue-500 font-medium">KALAISELVI T</p>
+                        <p class="text-gray-700 text-sm mt-3">
+                            Associate Professor, Department of Computer Science & Engineering.
+                        </p>
+                    </div>
+                </div>
             </div>
+
 
         </div>
     </section>
