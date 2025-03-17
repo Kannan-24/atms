@@ -10,6 +10,21 @@
 
             <div class="overflow-hidden bg-white rounded-lg shadow-xl">
                 <div class="p-6 overflow-x-auto">
+                    <form action="{{ route('attendance.show', $bus->id) }}" method="GET">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                            <div class="flex flex-col md:flex-row md:items-center">
+                                <label for="date" class="mr-2">Date:</label>
+                                <input type="date" name="date" id="date" class="w-full md:w-48"
+                                    value="{{ old('date', $date) ?? '' }}">
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-center">
+                                <button type="submit"
+                                    class="px-4 py-2 mt-2 text-white bg-indigo-500 rounded-md hover:bg-indigo-600">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <table class="min-w-full text-left border-collapse table-auto">
                         <thead>
                             <tr class="text-sm text-gray-600 bg-indigo-100">
@@ -20,20 +35,13 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm text-gray-700">
-                            @foreach ($bus->students as $student)
-                                @php
-                                    $busAttendance = $student->busAttendance ? $student->busAttendance->first() : null;
-                                    $status = $busAttendance ? $busAttendance->status : 'N/A';
-                                    $rowClass = $status === 'Absent' ? 'bg-red-200 text-red-800' : ($status === 'Present' ? 'bg-green-200 text-green-800' : '');
-                                @endphp
+                            @foreach ($attendance as $student)
                                 <tr class="border-b {{ $rowClass }} !important">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->user->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->busAttendance && $student->busAttendance->first() ? $student->busAttendance->first()->check_in : 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $status }}
                                     </td>
                                 </tr>
                             @endforeach
