@@ -3,7 +3,7 @@
         {{ __('Import Students') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-4xl sm:px-6 lg:px-8">
             <x-bread-crumb-navigation />
 

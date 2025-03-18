@@ -5,7 +5,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -46,7 +46,7 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                     </div>
-                    
+
                     <!-- Date of Birth -->
                     <div class="mb-4">
                         <label for="dob" class="block text-sm font-semibold text-gray-700">Date of Birth</label>
@@ -88,8 +88,10 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="">Select Batch</option>
-                            @foreach($batches as $batch)
-                                <option value="{{ $batch->id }}" {{ $student->batch_id == $batch->id ? 'selected' : '' }}>{{ $batch->start_year }} - {{ $batch->end_year }}</option>
+                            @foreach ($batches as $batch)
+                                <option value="{{ $batch->id }}"
+                                    {{ $student->batch_id == $batch->id ? 'selected' : '' }}>{{ $batch->start_year }}
+                                    - {{ $batch->end_year }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -101,8 +103,10 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="">Select Department</option>
-                            @foreach($departments as $department)
-                                <option value="{{ $department->id }}" {{ $student->dept_id == $department->id ? 'selected' : '' }}>{{ $department->dept_name }} - {{ $department->dept_code }}</option>
+                            @foreach ($departments as $department)
+                                <option value="{{ $department->id }}"
+                                    {{ $student->dept_id == $department->id ? 'selected' : '' }}>
+                                    {{ $department->dept_name }} - {{ $department->dept_code }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -114,8 +118,10 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="">Select Class</option>
-                            @foreach($classes as $class)
-                                <option value="{{ $class->id }}" {{ $student->class_id == $class->id ? 'selected' : '' }}>{{ $class->department->dept_code }} - {{ $class->section }}</option>
+                            @foreach ($classes as $class)
+                                <option value="{{ $class->id }}"
+                                    {{ $student->class_id == $class->id ? 'selected' : '' }}>
+                                    {{ $class->department->dept_code }} - {{ $class->section }}</option>
                             @endforeach
                         </select>
                     </div>

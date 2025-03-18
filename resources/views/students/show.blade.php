@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -13,38 +13,38 @@
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-semibold">Student Details</h2>
                     <div class="flex justify-end gap-4">
-    @if ($student->stop) 
-        <!-- If a stop is assigned, show Edit Stop button -->
-        <a href="{{ route('students.editStop', $student->id) }}">
-            <button class="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-700">
-                Edit Stop
-            </button>
-        </a>
-    @else 
-        <!-- If no stop is assigned, show Assign Stop button -->
-        <a href="{{ route('students.assignStops', $student->id) }}">
-            <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
-                Assign Stop
-            </button>
-        </a>
-    @endif
+                        @if ($student->stop)
+                            <!-- If a stop is assigned, show Edit Stop button -->
+                            <a href="{{ route('students.editStop', $student->id) }}">
+                                <button class="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-700">
+                                    Edit Stop
+                                </button>
+                            </a>
+                        @else
+                            <!-- If no stop is assigned, show Assign Stop button -->
+                            <a href="{{ route('students.assignStops', $student->id) }}">
+                                <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
+                                    Assign Stop
+                                </button>
+                            </a>
+                        @endif
 
-    <!-- Edit Student Button -->
-    <a href="{{ route('students.edit', $student->id) }}">
-        <button class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
-            Edit
-        </button>
-    </a>
+                        <!-- Edit Student Button -->
+                        <a href="{{ route('students.edit', $student->id) }}">
+                            <button class="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700">
+                                Edit
+                            </button>
+                        </a>
 
-    <!-- Delete Student Form -->
-    <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="inline">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">
-            Delete
-        </button>
-    </form>
-</div>
+                        <!-- Delete Student Form -->
+                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
 
                 </div>
                 <hr class="my-4">

@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -20,7 +20,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                            class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Delete</button>
+                                class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-700">Delete</button>
                         </form>
                     </div>
                 </div>

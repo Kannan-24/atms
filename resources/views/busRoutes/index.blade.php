@@ -5,7 +5,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
             <x-bread-crumb-navigation />
 
@@ -28,7 +28,7 @@
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $route->route_name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $route->start_location }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $route->end_location }}</td>
-                                        <x-action-buttons model="busroutes" :id="$route->id" />
+                                    <x-action-buttons model="busroutes" :id="$route->id" />
                                 </tr>
                             @endforeach
                         </tbody>

@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -87,8 +87,10 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="">Select Department</option>
-                            @foreach($departments as $department)
-                                <option value="{{ $department->id }}" {{ $faculty->dept_id == $department->id ? 'selected' : '' }}>{{ $department->dept_name }} - {{ $department->dept_code }}</option>
+                            @foreach ($departments as $department)
+                                <option value="{{ $department->id }}"
+                                    {{ $faculty->dept_id == $department->id ? 'selected' : '' }}>
+                                    {{ $department->dept_name }} - {{ $department->dept_code }}</option>
                             @endforeach
                         </select>
                     </div>

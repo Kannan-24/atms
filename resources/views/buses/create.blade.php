@@ -5,7 +5,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -32,7 +32,8 @@
 
                     <!-- Number of Seats -->
                     <div class="mb-4">
-                        <label for="no_of_seats" class="block text-sm font-semibold text-gray-700">Number of Seats</label>
+                        <label for="no_of_seats" class="block text-sm font-semibold text-gray-700">Number of
+                            Seats</label>
                         <input type="number" name="no_of_seats" id="no_of_seats"
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>

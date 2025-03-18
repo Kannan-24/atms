@@ -3,7 +3,7 @@
         Assign Stop - {{ $student->user->name }}
     </x-slot>
 
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <div class="p-8 bg-white border border-gray-200 rounded-lg shadow-lg">
                 <h2 class="text-2xl font-semibold mb-4">Assign Stop to {{ $student->user->name }}</h2>

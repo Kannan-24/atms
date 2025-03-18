@@ -3,7 +3,7 @@
         {{ __('Dashboard') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
-    <div class="mt-20 ml-4 py-9 sm:ml-64 sm:me-4 lg:me-0">
+    <div class="   ml-4 py-9 sm:ml-64 sm:me-4 lg:me-0">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
 
             <!-- Welcome Section -->

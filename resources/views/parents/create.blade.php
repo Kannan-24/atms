@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -41,7 +41,8 @@
                     <div class="mb-4">
                         <label for="relation" class="block text-sm font-semibold text-gray-700">Relationship</label>
                         <select name="relation" id="relation"
-                            class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            required>
                             <option value="" disabled selected>Select Relationship</option>
                             <option value="mother">Mother</option>
                             <option value="father">Father</option>
@@ -55,10 +56,12 @@
                     <div class="mb-4">
                         <label for="student_id" class="block text-sm font-semibold text-gray-700">Student ID</label>
                         <select name="student_id" id="student_id"
-                            class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                            class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            required>
                             <option value="" disabled selected>Select Student ID</option>
-                            @foreach($students as $student)
-                                <option value="{{ $student->id }}">{{ $student->user->name }} - {{ $student->roll_no }}</option>
+                            @foreach ($students as $student)
+                                <option value="{{ $student->id }}">{{ $student->user->name }} - {{ $student->roll_no }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

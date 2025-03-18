@@ -3,7 +3,7 @@
         {{ __('Class List') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
             <x-bread-crumb-navigation />
 
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     @endforeach
-                    
+
                 </div>
                 <x-pagination :paginator="$classes" />
             </div>

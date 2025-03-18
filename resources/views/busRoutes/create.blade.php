@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
             <!-- Form Container -->
@@ -22,7 +22,8 @@
 
                     <!-- Start Location -->
                     <div class="mb-5">
-                        <label for="start_location" class="block text-sm font-semibold text-gray-700">Start Location</label>
+                        <label for="start_location" class="block text-sm font-semibold text-gray-700">Start
+                            Location</label>
                         <input type="text" name="start_location" id="start_location"
                             class="w-full transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
@@ -38,7 +39,8 @@
 
                     <!-- Total Distance -->
                     <div class="mb-5">
-                        <label for="total_distance" class="block text-sm font-semibold text-gray-700">Total Distance (km)</label>
+                        <label for="total_distance" class="block text-sm font-semibold text-gray-700">Total Distance
+                            (km)</label>
                         <input type="number" name="total_distance" id="total_distance"
                             class="w-full transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
@@ -46,7 +48,8 @@
 
                     <!-- Submit Button -->
                     <div class="flex justify-between">
-                        <a href="{{ route('busroutes.index') }}" class="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
+                        <a href="{{ route('busroutes.index') }}"
+                            class="px-4 py-2 text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300">
                             Cancel
                         </a>
                         <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600">

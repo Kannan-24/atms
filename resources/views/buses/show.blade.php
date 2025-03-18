@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64 ">
+    <div class="py-6    ml-4 sm:ml-64 ">
         <div class="w-full px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -101,20 +101,26 @@
                                         <div class="mt-4">
                                             @if ($busDriver->valid_to)
                                                 <!-- Show Remove Driver Button -->
-                                                <form action="{{ route('buses.removeDriver', $busDriver->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this driver?');">
+                                                <form action="{{ route('buses.removeDriver', $busDriver->id) }}"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to remove this driver?');">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="w-full px-4 py-2 text-white bg-red-600 rounded-md shadow-md hover:bg-red-700 transition">
+                                                    <button type="submit"
+                                                        class="w-full px-4 py-2 text-white bg-red-600 rounded-md shadow-md hover:bg-red-700 transition">
                                                         Remove
                                                     </button>
                                                 </form>
                                             @else
                                                 <!-- Show Update Validity Button -->
-                                                <form action="{{ route('buses.updateDriverValidity', $busDriver->id) }}" method="POST">
+                                                <form
+                                                    action="{{ route('buses.updateDriverValidity', $busDriver->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('PATCH')
                                                     <input type="hidden" name="valid_to" value="{{ now() }}">
-                                                    <button type="submit" class="w-full px-4 py-2 text-blue-600 bg-white rounded-md shadow-md hover:bg-gray-100 transition">
+                                                    <button type="submit"
+                                                        class="w-full px-4 py-2 text-blue-600 bg-white rounded-md shadow-md hover:bg-gray-100 transition">
                                                         Update Validity
                                                     </button>
                                                 </form>

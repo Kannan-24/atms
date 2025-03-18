@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between mt-6">
+<div class="flex flex-col justify-between mt-4">
     <!-- Showing Results -->
     @if ($paginator->total() > 0)
         <div class="text-sm text-gray-600 items-center flex justify-center mb-2">
@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <div class="flex items-center justify-between space-x-2 p-2">
+    <div class="flex items-center justify-between space-x-2">
         <!-- Previous Button -->
         @if ($paginator->onFirstPage())
             <span class="px-4 py-2 text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed">‹ Prev</span>

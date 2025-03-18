@@ -3,7 +3,7 @@
         Attendance Reports - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
             <x-bread-crumb-navigation />
 
@@ -22,7 +22,8 @@
                         @foreach ($buses as $bus)
                             <tr class="border-b hover:bg-indigo-50">
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $bus->number }}</td>
-                                <td class="px-6 py-4 border-b border-gray-200">{{ $bus->route->route_name ?? 'N/A' }}</td>
+                                <td class="px-6 py-4 border-b border-gray-200">{{ $bus->route->route_name ?? 'N/A' }}
+                                </td>
                                 <td class="px-6 py-4 border-b border-gray-200">
                                     <a href="{{ route('reports.bus.show', $bus->id) }}"
                                         class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">

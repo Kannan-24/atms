@@ -3,24 +3,28 @@
         {{ __('Track Bus') }} - {{ $bus->number }}
     </x-slot>
 
-    <div class="mt-20 ml-4 py-9 sm:ml-64 sm:me-4 lg:me-0">
+    <div class="   ml-4 py-9 sm:ml-64 sm:me-4 lg:me-0">
         <div class="w-full mx-auto max-w-7xl sm:px-6 lg:px-8">
-            
-             <div class="mb-6">
+
+            <div class="mb-6">
                 <nav class="flex items-center justify-between p-4 bg-white rounded-lg shadow-md">
                     <ol class="inline-flex items-center space-x-2">
-                        <li><a href="{{ route('dashboard') }}" class="font-medium text-blue-800 hover:text-blue-900">Dashboard</a></li>
+                        <li><a href="{{ route('dashboard') }}"
+                                class="font-medium text-blue-800 hover:text-blue-900">Dashboard</a></li>
                         <li class="flex items-center">
                             <svg class="w-4 h-4 mx-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
                             </svg>
-                            <a href="{{ route('track-buses.index') }}" class="font-medium text-blue-800 hover:text-blue-900">Track Bus</a>
+                            <a href="{{ route('track-buses.index') }}"
+                                class="font-medium text-blue-800 hover:text-blue-900">Track Bus</a>
                         </li>
                         <li class="flex items-center">
                             <svg class="w-4 h-4 mx-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
                             </svg>
                             <span class="font-semibold text-blue-900 capitalize">Bus {{ $bus->number }}</span>
                         </li>
@@ -84,7 +88,8 @@
                             </tr>
                             <tr>
                                 <td class="py-2 px-4 text-gray-600">Incharge Phone:</td>
-                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">{{  $bus->facultyIncharge->faculty->user->phone }}
+                                <td class="py-2 px-4 text-lg font-semibold text-blue-900">
+                                    {{ $bus->facultyIncharge->faculty->user->phone }}
                                 </td>
                             </tr>
                         @else
@@ -110,20 +115,49 @@
         </div>
     </div>
 
-   <script>
-        let map, markers = [], busPath = null, latestMarker = null;
+    <script>
+        let map, markers = [],
+            busPath = null,
+            latestMarker = null;
         let followBus = true; // Auto-focus on bus when moving
 
         async function initMap() {
-            const { Map } = await google.maps.importLibrary("maps");
+            const {
+                Map
+            } = await google.maps.importLibrary("maps");
             map = new Map(document.getElementById("map"), {
-                center: { lat: 11.3131, lng: 77.5504 },
+                center: {
+                    lat: 11.3131,
+                    lng: 77.5504
+                },
                 zoom: 14,
-                styles: [
-                    { featureType: "road", elementType: "geometry", stylers: [{ lightness: 50 }] },
-                    { featureType: "water", elementType: "geometry", stylers: [{ color: "#a0c5ff" }] },
-                    { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
-                    { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] }
+                styles: [{
+                        featureType: "road",
+                        elementType: "geometry",
+                        stylers: [{
+                            lightness: 50
+                        }]
+                    },
+                    {
+                        featureType: "water",
+                        elementType: "geometry",
+                        stylers: [{
+                            color: "#a0c5ff"
+                        }]
+                    },
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{
+                            visibility: "off"
+                        }]
+                    },
+                    {
+                        elementType: "geometry",
+                        stylers: [{
+                            color: "#ebe3cd"
+                        }]
+                    }
                 ]
             });
 
@@ -131,7 +165,9 @@
             setInterval(() => fetchBusLocations({{ $bus->id }}), 10000);
 
             // Detect user panning & disable auto-follow
-            map.addListener("dragstart", () => { followBus = false; });
+            map.addListener("dragstart", () => {
+                followBus = false;
+            });
         }
 
         async function fetchBusLocations(busId) {
@@ -146,24 +182,31 @@
 
         async function showBusLocations(buses) {
             if (!buses[{{ $bus->id }}] || buses[{{ $bus->id }}].length === 0) return;
-            
+
             // Clear previous markers and path
             markers.forEach(marker => marker.setMap(null));
             markers = [];
             if (busPath) busPath.setMap(null);
 
-            const busLocations = buses[{{ $bus->id }}].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const busLocations = buses[{{ $bus->id }}].sort((a, b) => new Date(b.created_at) - new Date(a
+                .created_at));
             const latestLocation = busLocations[0];
 
             // Auto-center on bus if followBus is enabled
             if (followBus) {
-                map.panTo({ lat: latestLocation.latitude, lng: latestLocation.longitude });
+                map.panTo({
+                    lat: latestLocation.latitude,
+                    lng: latestLocation.longitude
+                });
             }
 
             // Custom Bus Icon
             if (latestMarker) latestMarker.setMap(null);
             latestMarker = new google.maps.Marker({
-                position: { lat: latestLocation.latitude, lng: latestLocation.longitude },
+                position: {
+                    lat: latestLocation.latitude,
+                    lng: latestLocation.longitude
+                },
                 map,
                 title: "Current Location - Bus {{ $bus->number }}",
                 icon: {
@@ -176,7 +219,10 @@
             markers.push(latestMarker);
 
             // Draw Route Path with Gradient Effect
-            const routeCoordinates = busLocations.map(loc => ({ lat: loc.latitude, lng: loc.longitude }));
+            const routeCoordinates = busLocations.map(loc => ({
+                lat: loc.latitude,
+                lng: loc.longitude
+            }));
             busPath = new google.maps.Polyline({
                 path: routeCoordinates,
                 geodesic: true,
@@ -190,7 +236,10 @@
             for (let i = 1; i < busLocations.length; i++) {
                 const oldLocation = busLocations[i];
                 const oldMarker = new google.maps.Marker({
-                    position: { lat: oldLocation.latitude, lng: oldLocation.longitude },
+                    position: {
+                        lat: oldLocation.latitude,
+                        lng: oldLocation.longitude
+                    },
                     map,
                     title: "Previous Location - Bus {{ $bus->number }}",
                     icon: {

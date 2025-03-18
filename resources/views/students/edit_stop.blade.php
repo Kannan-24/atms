@@ -3,7 +3,7 @@
         {{ __('Edit Assigned Stop') }} - {{ config('app.name', 'ATMS') }}
     </x-slot>
 
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -15,9 +15,9 @@
                     <div class="mb-4">
                         <label for="stop_id" class="block font-medium text-gray-700">Select New Stop</label>
                         <select name="stop_id" id="stop_id" class="w-full px-3 py-2 border rounded">
-                            @foreach($stops as $stop)
-                                <option value="{{ $stop->id }}" 
-                                    {{ ($assignedStop && $assignedStop->stop_id == $stop->id) ? 'selected' : '' }}>
+                            @foreach ($stops as $stop)
+                                <option value="{{ $stop->id }}"
+                                    {{ $assignedStop && $assignedStop->stop_id == $stop->id ? 'selected' : '' }}>
                                     {{ $stop->stop_name }}
                                 </option>
                             @endforeach

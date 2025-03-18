@@ -4,7 +4,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -45,7 +45,8 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="active" {{ $stop->status == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ $stop->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                            <option value="inactive" {{ $stop->status == 'inactive' ? 'selected' : '' }}>Inactive
+                            </option>
                         </select>
                     </div>
 

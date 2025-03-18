@@ -5,7 +5,7 @@
     </x-slot>
 
     <!-- Main Content Section -->
-    <div class="py-6 mt-20 ml-4 sm:ml-64">
+    <div class="py-6    ml-4 sm:ml-64">
         <div class="w-full max-w-4xl px-6 mx-auto">
             <x-bread-crumb-navigation />
 
@@ -22,8 +22,10 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="">Select Department</option>
-                            @foreach($departments as $department)
-                                <option value="{{ $department->id }}" {{ $class->dept_id == $department->id ? 'selected' : '' }}>{{ $department->dept_name }}</option>
+                            @foreach ($departments as $department)
+                                <option value="{{ $department->id }}"
+                                    {{ $class->dept_id == $department->id ? 'selected' : '' }}>
+                                    {{ $department->dept_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -35,20 +37,24 @@
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
                             <option value="">Select Batch</option>
-                            @foreach($batches as $batch)
-                                <option value="{{ $batch->id }}" {{ $class->batch_id == $batch->id ? 'selected' : '' }}>{{ $batch->start_year }} - {{ $batch->end_year }}</option>
+                            @foreach ($batches as $batch)
+                                <option value="{{ $batch->id }}"
+                                    {{ $class->batch_id == $batch->id ? 'selected' : '' }}>{{ $batch->start_year }} -
+                                    {{ $batch->end_year }}</option>
                             @endforeach
                         </select>
                     </div>
-                        
+
                     <!-- Section -->
                     <div class="mb-4">
                         <label for="section" class="block text-sm font-semibold text-gray-700">Section</label>
                         <select name="section" id="section"
                             class="w-full p-2 mt-1 transition duration-300 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                             required>
-                            <option value="A" {{ old('section', $class->section) == 'A' ? 'selected' : '' }}>A</option>
-                            <option value="B" {{ old('section', $class->section) == 'B' ? 'selected' : '' }}>B</option>
+                            <option value="A" {{ old('section', $class->section) == 'A' ? 'selected' : '' }}>A
+                            </option>
+                            <option value="B" {{ old('section', $class->section) == 'B' ? 'selected' : '' }}>B
+                            </option>
                         </select>
                     </div>
 
