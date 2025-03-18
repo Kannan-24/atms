@@ -57,13 +57,13 @@
                                         {{ $student->check_in }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->check_in_stop }}
+                                        {{ $student->check_in_stop_id }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->check_out }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->check_out_stop }}
+                                        {{ $student->check_out_stop_id }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
                                         {{ $student->check_in != null || $student->check_out != null ? 'Present' : 'Absent' }}
