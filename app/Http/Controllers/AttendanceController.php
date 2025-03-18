@@ -28,9 +28,21 @@ class AttendanceController extends Controller
     /**
      * Show attendance records for a specific bus.
      */
-    public function show($bus_id)
+    public function show(Request $request, $bus_id)
     {
+        $date = $request->input('date') ?? date('Y-m-d');
+
         $bus = Bus::findOrFail($bus_id);
-        return view('attendance.show', compact('bus'));
+        $buses = Bus::all();
+
+        $attendance = Attendance::where('bus_id', $bus_id)
+            ->whereDate('check_in', $date)
+            ->orderBy('check_in', 'asc')
+            ->get();
+
+        return view('attendance.show', compact('bus'))
+            ->with('buses', $buses)
+            ->with('date', $date)
+            ->with('attendance', $attendance);
     }
 }

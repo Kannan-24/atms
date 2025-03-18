@@ -35,15 +35,20 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm text-gray-700">
-                            @foreach ($attendance as $student)
-                                <tr class="border-b !important">
+                            @foreach ($bus->students as $student)
+                                @php
+                                    $busAttendance = $student->busAttendance ? $student->busAttendance->first() : null;
+                                    $status = $busAttendance ? $busAttendance->status : 'N/A';
+                                    $rowClass = $status === 'Absent' ? 'bg-red-200 text-red-800' : ($status === 'Present' ? 'bg-green-200 text-green-800' : '');
+                                @endphp
+                                <tr class="border-b {{ $rowClass }} !important">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->student->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-										{{ $student->check_in }}
+                                        {{ $student->busAttendance && $student->busAttendance->first() ? $student->busAttendance->first()->check_in : 'N/A' }}
                                     </td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-										{{ $student->check_in != null ? 'Present' : 'Absent' }}
+                                        {{ $status }}
                                     </td>
                                 </tr>
                             @endforeach
