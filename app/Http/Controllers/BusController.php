@@ -322,7 +322,6 @@ class BusController extends Controller
 
             $attendance = Attendance::where('user_id', $userId->user_id)
                 ->whereDate('check_in', now()->format('Y-m-d'))
-                ->where('towards_college', $towardsCollege)
                 ->where('bus_id', $request->bus_id)
                 ->where('route_id', $route->id)
                 ->first();

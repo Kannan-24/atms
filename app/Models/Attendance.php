@@ -29,6 +29,10 @@ class Attendance extends Model
     protected $casts = [
         'check_in' => 'datetime',
         'check_out' => 'datetime',
+        'check_in_latitude' => 'float',
+        'check_in_longitude' => 'float',
+        'check_out_latitude' => 'float',
+        'check_out_longitude' => 'float',
         'towards_college' => 'boolean',
         'distance_traveled' => 'float',
     ];
