@@ -18,6 +18,13 @@
                                     value="{{ old('date', $date) ?? '' }}">
                             </div>
                             <div class="flex flex-col md:flex-row md:items-center">
+                                <label for="towards_college" class="mr-2">Time:</label>
+                                <select name="towards_college" id="towards_college" class="w-full md:w-48">
+                                    <option value="1" {{ (old('towards_college', $towards_college) == 1) ? 'selected' : '' }}>Morning</option>
+                                    <option value="0" {{ (old('towards_college', $towards_college) == 0) ? 'selected' : '' }}>Evening</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-center">
                                 <button type="submit"
                                     class="px-4 py-2 mt-2 text-white bg-indigo-500 rounded-md hover:bg-indigo-600">
                                     Filter
@@ -30,25 +37,24 @@
                             <tr class="text-sm text-gray-600 bg-indigo-100">
                                 <th class="px-6 py-4 border-b-2 border-gray-200">#</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Student Name</th>
-                                <th class="px-6 py-4 border-b-2 border-gray-200">Check-in</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Check-in Morning</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Check-out Morning</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Check-in Evening</th>
+                                <th class="px-6 py-4 border-b-2 border-gray-200">Check-out Evening</th>
                                 <th class="px-6 py-4 border-b-2 border-gray-200">Status</th>
                             </tr>
                         </thead>
                         <tbody class="text-sm text-gray-700">
-                            @foreach ($bus->students as $student)
-                                @php
-                                    $busAttendance = $student->busAttendance ? $student->busAttendance->first() : null;
-                                    $status = $busAttendance ? $busAttendance->status : 'N/A';
-                                    $rowClass = $status === 'Absent' ? 'bg-red-200 text-red-800' : ($status === 'Present' ? 'bg-green-200 text-green-800' : '');
-                                @endphp
-                                <tr class="border-b {{ $rowClass }} !important">
+                            @foreach ($attendance as $student)
+                                <tr class="border-b !important">
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">{{ $student->student->name }}</td>
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $student->busAttendance && $student->busAttendance->first() ? $student->busAttendance->first()->check_in : 'N/A' }}
+										{{ $student->check_in }}
                                     </td>
+
                                     <td class="px-6 py-4 border-b border-gray-200">
-                                        {{ $status }}
+										{{ $student->check_in != null ? 'Present' : 'Absent' }}
                                     </td>
                                 </tr>
                             @endforeach

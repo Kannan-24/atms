@@ -31,6 +31,7 @@ class AttendanceController extends Controller
     public function show(Request $request, $bus_id)
     {
         $date = $request->input('date') ?? date('Y-m-d');
+        $towards_college = $request->input('towards_college') ?? 1;
 
         $bus = Bus::findOrFail($bus_id);
         $buses = Bus::all();
@@ -38,11 +39,13 @@ class AttendanceController extends Controller
         $attendance = Attendance::where('bus_id', $bus_id)
             ->whereDate('check_in', $date)
             ->orderBy('check_in', 'asc')
+            ->where('towards_college', $towards_college)
             ->get();
 
         return view('attendance.show', compact('bus'))
             ->with('buses', $buses)
             ->with('date', $date)
-            ->with('attendance', $attendance);
+            ->with('attendance', $attendance)
+            ->with('towards_college', $towards_college);
     }
 }
