@@ -16,6 +16,7 @@ use App\Models\Stop;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BusController extends Controller
 {
@@ -320,13 +321,22 @@ class BusController extends Controller
             ) ? true : false;
 
             $attendance = Attendance::where('user_id', $userId->user_id)
-                ->whereDate('check_in', now())
+                ->whereDate('check_in', now()->format('Y-m-d'))
+                ->where('towards_college', $towardsCollege)
                 ->where('bus_id', $request->bus_id)
                 ->where('route_id', $route->id)
                 ->first();
 
             if ($attendance) {
                 $attendance->update([
+                    'check_out' => now(),
+                    'check_out_stop_id' => $stop->id,
+                    'check_out_latitude' => (float) $request->latitude,
+                    'check_out_longitude' => (float) $request->longitude,
+                ]);
+
+                Log::info('Attendance updated', [
+                    'user_id' => $userId->user_id,
                     'check_out' => now(),
                     'check_out_stop_id' => $stop->id,
                     'check_out_latitude' => (float) $request->latitude,
@@ -344,6 +354,14 @@ class BusController extends Controller
                     'bus_id' => $request->bus_id,
                     'route_id' => $route->id,
                     'distance_traveled' => 0,
+                ]);
+
+                Log::info('Attendance created', [
+                    'user_id' => $userId->user_id,
+                    'check_in' => now(),
+                    'check_in_stop_id' => $stop->id,
+                    'check_in_latitude' => (float) $request->latitude,
+                    'check_in_longitude' => (float) $request->longitude,
                 ]);
             }
 
