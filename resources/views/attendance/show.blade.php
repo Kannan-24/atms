@@ -10,16 +10,16 @@
 
             <div class="overflow-hidden bg-white rounded-lg shadow-xl">
                 <div class="p-6 overflow-x-auto">
-                    <form action="{{ route('attendance.show', $bus->id) }}" method="GET">
+                    <form action="{{ route('attendance.show', $bus->id) }}" method="GET" id="filterForm">
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                             <div class="flex flex-col md:flex-row md:items-center">
                                 <label for="date" class="mr-2">Date:</label>
                                 <input type="date" name="date" id="date" class="w-full md:w-48"
-                                    value="{{ old('date', $date) ?? '' }}">
+                                    value="{{ old('date', $date) ?? '' }}" onchange="document.getElementById('filterForm').submit();">
                             </div>
                             <div class="flex flex-col md:flex-row md:items-center">
                                 <label for="towards_college" class="mr-2">Time:</label>
-                                <select name="towards_college" id="towards_college" class="w-full md:w-48">
+                                <select name="towards_college" id="towards_college" class="w-full md:w-48" onchange="document.getElementById('filterForm').submit();">
                                     <option value="1"
                                         {{ old('towards_college', $towards_college) == 1 ? 'selected' : '' }}>Morning
                                     </option>
@@ -27,12 +27,6 @@
                                         {{ old('towards_college', $towards_college) == 0 ? 'selected' : '' }}>Evening
                                     </option>
                                 </select>
-                            </div>
-                            <div class="flex flex-col md:flex-row md:items-center">
-                                <button type="submit"
-                                    class="px-4 py-2 mt-2 text-white bg-indigo-500 rounded-md hover:bg-indigo-600">
-                                    Filter
-                                </button>
                             </div>
                         </div>
                     </form>
