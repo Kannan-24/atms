@@ -327,6 +327,11 @@ class BusController extends Controller
                 ->first();
 
             if ($attendance) {
+
+                if ($attendance->check_out) {
+                    return response()->json(['error' => 'Attendance already marked for today.'], 400);
+                }
+
                 $attendance->update([
                     'check_out' => now(),
                     'check_out_stop_id' => $stop->id,

@@ -75,9 +75,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
-    Route::get('/reports/bus/{busId}', [ReportController::class, 'showBusReportForm'])->name('reports.bus.select');
-    Route::post('/reports/bus/{busId}', [ReportController::class, 'generateBusReport'])->name('reports.bus.generate');
-    Route::get('/reports/bus/{busId}/pdf', [ReportController::class, 'generateBusPDF'])->name('reports.bus.pdf');
+    Route::get('/reports/{bus}', [ReportController::class, 'showBusReport'])->name('reports.bus.show');
+    Route::get('/reports/{bus}/pdf', [ReportController::class, 'generateBusPDF'])->name('reports.bus.pdf');
+
 
 
     // Route Stops
