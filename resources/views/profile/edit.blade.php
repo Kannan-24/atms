@@ -10,6 +10,8 @@
                     @csrf
                     @method('PUT')
 
+                    <input type="hidden" name="user_type" value="{{ $user->user_type }}">
+
                     <div class="mb-4">
                         <label class="block mb-2 font-bold">Name:</label>
                         <input type="text" name="name" value="{{ old('name', $user->name) }}"
@@ -22,6 +24,7 @@
                             class="w-full border rounded-lg">
                     </div>
 
+                    <!-- Common Profile Fields -->
                     <div class="mb-4">
                         <label class="block mb-2 font-bold">Phone:</label>
                         <input type="text" name="phone" value="{{ old('phone', $user->phone) }}"
@@ -33,97 +36,57 @@
                         <textarea name="address" class="w-full border rounded-lg">{{ old('address', $user->address) }}</textarea>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">Blood Group:</label>
-                        <select name="blood_group" class="w-full border rounded-lg">
-                            <option value="">Select Blood Group</option>
-                            @php
-                                $bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-', 'A1+'];
-                            @endphp
-                            @foreach ($bloodGroups as $group)
-                                <option value="{{ $group }}"
-                                    {{ old('blood_group', $user->blood_group) == $group ? 'selected' : '' }}>
-                                    {{ $group }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <!-- Show Student Fields -->
+                    @if ($user->user_type == 'student')
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold">Department:</label>
+                            <input type="text" name="department"
+                                value="{{ old('department', $user->student->department ?? '') }}"
+                                class="w-full border rounded-lg">
+                        </div>
 
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">State:</label>
-                        <select name="state" class="w-full border rounded-lg">
-                            <option value="">Select State</option>
-                            @php
-                                $states = [
-                                    'Tamil Nadu',
-                                    'Andhra Pradesh',
-                                    'Arunachal Pradesh',
-                                    'Assam',
-                                    'Bihar',
-                                    'Chhattisgarh',
-                                    'Goa',
-                                    'Gujarat',
-                                    'Haryana',
-                                    'Himachal Pradesh',
-                                    'Jharkhand',
-                                    'Karnataka',
-                                    'Kerala',
-                                    'Madhya Pradesh',
-                                    'Maharashtra',
-                                    'Manipur',
-                                    'Meghalaya',
-                                    'Mizoram',
-                                    'Nagaland',
-                                    'Odisha',
-                                    'Punjab',
-                                    'Rajasthan',
-                                    'Sikkim',
-                                    'Telangana',
-                                    'Tripura',
-                                    'Uttar Pradesh',
-                                    'Uttarakhand',
-                                    'West Bengal',
-                                    'Andaman and Nicobar Islands',
-                                    'Chandigarh',
-                                    'Dadra and Nagar Haveli',
-                                    'Daman and Diu',
-                                    'Lakshadweep',
-                                    'Delhi',
-                                    'Puducherry',
-                                ];
-                            @endphp
-                            @foreach ($states as $state)
-                                <option value="{{ $state }}"
-                                    {{ old('state', $user->state) == $state ? 'selected' : '' }}>
-                                    {{ $state }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold">Batch:</label>
+                            <input type="text" name="batch" value="{{ old('batch', $user->student->batch ?? '') }}"
+                                class="w-full border rounded-lg">
+                        </div>
+                    @endif
 
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">Gender:</label>
-                        <select name="gender" class="w-full border rounded-lg">
-                            <option value="">Select Gender</option>
-                            @php
-                                $genders = ['Male', 'Female', 'Other'];
-                            @endphp
-                            @foreach ($genders as $gender)
-                                <option value="{{ $gender }}"
-                                    {{ old('gender', $user->gender) == $gender ? 'selected' : '' }}>
-                                    {{ $gender }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <!-- Show Faculty Fields -->
+                    @if ($user->user_type == 'faculty')
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold">Subject:</label>
+                            <input type="text" name="subject"
+                                value="{{ old('subject', $user->faculty->subject ?? '') }}"
+                                class="w-full border rounded-lg">
+                        </div>
 
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">Date of Birth:</label>
-                        <input type="date" name="dob" value="{{ old('dob', $user->dob) }}"
-                            class="w-full border rounded-lg">
-                    </div>
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold">Experience (Years):</label>
+                            <input type="number" name="experience"
+                                value="{{ old('experience', $user->faculty->experience ?? '') }}"
+                                class="w-full border rounded-lg">
+                        </div>
+                    @endif
 
-                    <!-- Submit Button at the End -->
+                    <!-- Show Driver Fields -->
+                    @if ($user->user_type == 'driver')
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold">License Number:</label>
+                            <input type="text" name="license_number"
+                                value="{{ old('license_number', $user->driver->license_number ?? '') }}"
+                                class="w-full border rounded-lg">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block mb-2 font-bold">Experience (Years):</label>
+                            <input type="number" name="experience"
+                                value="{{ old('experience', $user->driver->experience ?? '') }}"
+                                class="w-full border rounded-lg">
+                        </div>
+                    @endif
+
+                    <!-- Submit Button -->
                     <div class="flex justify-end">
                         <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
                             Save Changes
@@ -131,6 +94,7 @@
                     </div>
 
                 </form>
+
             </div>
         </div>
     </div>

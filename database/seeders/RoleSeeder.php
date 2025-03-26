@@ -15,117 +15,121 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            // User
-            'view user',
-            'create user',
-            'update user',
-            'delete user',
+            // Dashboard
+            'view dashboard',
 
-            //Parent
+            // Profile
+            'view profile',
+            'edit profile',
+            'update profile photo',
+
+            // Account Settings
+            'view account settings',
+            'update password',
+            'delete account',
+
+            // Departments
+            'view department',
+            'create department',
+            'update department',
+            'delete department',
+            'import department',
+
+            // Drivers
+            'view driver',
+            'create driver',
+            'update driver',
+            'delete driver',
+            'assign driver',
+            'import driver',
+
+            // Faculty
+            'view faculty',
+            'create faculty',
+            'update faculty',
+            'delete faculty',
+            'assign faculty',
+            'import faculty',
+
+            // Students
+            'view student',
+            'create student',
+            'update student',
+            'delete student',
+            'import student',
+            'assign stop to student',
+            'edit student stop',
+
+            // Buses
+            'view bus',
+            'create bus',
+            'update bus',
+            'delete bus',
+            'assign route to bus',
+            'assign driver to bus',
+            'assign faculty to bus',
+            'track bus',
+
+            // Bus Routes
+            'view busroute',
+            'create busroute',
+            'update busroute',
+            'delete busroute',
+            'assign stops to busroute',
+
+            // Stops
+            'view stops',
+            'create stops',
+            'update stops',
+            'delete stops',
+            'import stops',
+
+            // Batches
+            'view batch',
+            'create batch',
+            'update batch',
+            'delete batch',
+            'import batch',
+
+            // Classes
+            'view class',
+            'create class',
+            'update class',
+            'delete class',
+            'import class',
+
+            // Parents
             'view parent',
             'create parent',
             'update parent',
             'delete parent',
 
-            // bus
-            'view bus',
-            'create bus',
-            'update bus',
-            'delete bus',
-
-            // busstop
-            'view busstop',
-            'create busstop',
-            'update busstop',
-            'delete busstop',
-
-            // bus route
-            'view busroute',
-            'create busroute',
-            'update busroute',
-            'delete busroute',
-
-            // driver
-            'view driver',
-            'create driver',
-            'update driver',
-            'delete driver',
-
-            //faculty
-            'view faculty',
-            'create faculty',
-            'update faculty',
-            'delete faculty',
-
-            // student
-            'view student',
-            'create student',
-            'update student',
-            'delete student',
-
-            // attendance
+            // Attendance
             'view attendance',
             'create attendance',
             'update attendance',
             'delete attendance',
 
-            //report
+            // Reports
             'view report',
-
-
-            //track bus
-            'track bus',
-            
-
-
+            'generate report pdf',
         ];
 
         foreach ($permissions as $permission) {
-            Permission::updateOrCreate([
-                'name' => $permission
-            ]);
+            Permission::updateOrCreate(['name' => $permission]);
         }
 
-        $role = Role::updateOrCreate(['name' => 'admin']);
-        $role->givePermissionTo($permissions);
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $admin->syncPermissions(Permission::all());
 
-        $role = Role::updateOrCreate(['name' => 'parent']);
-        $role->givePermissionTo([
-            'view parent',
-            'update parent',
-            'view student',
-            'view attendance',
-        ]);
-
-        $role = Role::updateOrCreate(['name' => 'student']);
-        $role->givePermissionTo([
-            'view student',
-            'update student',
-            'view attendance',
-            'view parent',
-        ]);
-
-        $role = Role::updateOrCreate(['name' => 'faculty']);
-        $role->givePermissionTo([
-            'view faculty',
-            'update faculty',
-            'view attendance',
-            'view student',
-            'view parent',
-            'view bus',
-            'view busstop',
-            'view busroute',
-            'view driver',
-            'view report',
-        ]);
-
-        $role = Role::updateOrCreate(['name' => 'driver']);
-        $role->givePermissionTo([
-            'view driver',
-            'update driver',
-            'view bus',
-            'view busstop',
-            'view busroute',
+        $student = Role::firstOrCreate(['name' => 'student']);
+        $student->syncPermissions([
+            'view profile',
+            'edit profile',
+            'update profile photo',
+            'view account settings',
+            'update password',
+            ''
         ]);
     }
 }

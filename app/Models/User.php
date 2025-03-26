@@ -50,11 +50,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function student()
-    {
-        return $this->hasOne(Student::class);
-    }
-
     public function stops(): HasMany
     {
         return $this->hasMany(UserStop::class);
@@ -63,5 +58,20 @@ class User extends Authenticatable
     public function attendance()
     {
         return $this->hasMany(Attendance::class, 'user_id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'user_id');
+    }
+
+    public function faculty()
+    {
+        return $this->hasOne(Faculty::class, 'user_id');
+    }
+
+    public function driver()
+    {
+        return $this->hasOne(Driver::class, 'user_id');
     }
 }

@@ -18,6 +18,11 @@
                     <h2 class="mb-4 text-xl font-bold text-gray-800">Profile Details</h2>
                     <div class="space-y-4">
                         <div class="flex">
+                            <span class="text-gray-600">👤 Name:</span>
+                            <span class="font-semibold text-gray-800">{{ $user->name }}</span>
+                        </div>
+
+                        <div class="flex">
                             <span class="text-gray-600">📧 Email:</span>
                             <span class="font-semibold text-gray-800">{{ $user->email }}</span>
                         </div>
