@@ -127,9 +127,38 @@ class RoleSeeder extends Seeder
             'view profile',
             'edit profile',
             'update profile photo',
-            'view account settings',
-            'update password',
-            ''
+            'view bus',
+            'track bus',
+            'view attendance',
+            'view report',
+        ]);
+
+        $faculty = Role::firstOrCreate(['name' => 'faculty']);
+        $faculty->syncPermissions([
+            'view profile',
+            'edit profile',
+            'update profile photo',
+            'view bus',
+            'track bus',
+            'view student',
+            'assign stop to student',
+            'edit student stop',
+            'view attendance',
+            'create attendance',
+            'update attendance',
+            'view report',
+            'generate report pdf',
+        ]);
+
+        $driver = Role::firstOrCreate(['name' => 'driver']);
+        $driver->syncPermissions([
+            'view profile',
+            'edit profile',
+            'update profile photo',
+            'view bus',
+            'track bus',
+            'view busroute',
+            'view stops',
         ]);
     }
 }

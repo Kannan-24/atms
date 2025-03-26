@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Arrival Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .header img {
+            max-height: 40px;
+            margin-right: 10px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+        }
+
+        .content {
+            padding: 20px;
+            color: #333333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header with Logo and ATMS Name -->
+        <div class="header">
+            <img src="https://your-logo-url.com/logo.png" alt="ATMS Logo">
+            <h1>ATMS</h1>
+        </div>
+
+        <div class="content">
+            <p>Dear <strong>{{ student_name }}</strong>,</p>
+            <p>Your assigned bus <strong>{{ bus_number }}</strong> is arriving shortly. Please be prepared at your
+                designated stop.</p>
+
+            <p><strong>Student Details:</strong> <br>
+                Name: <strong>{{ student_name }}</strong> <br>
+                Roll Number: <strong>{{ student_roll }}</strong></p>
+
+            <p><strong>Driver Details:</strong> <br>
+                Name: <strong>{{ bus_driver }}</strong> <br>
+                Contact: <strong>{{ bus_driver_phone }}</strong></p>
+
+            <p><strong>Bus In-Charge:</strong> <br>
+                Faculty: <strong>{{ bus_incharge }}</strong> <br>
+                Contact: <strong>{{ bus_incharge_phone }}</strong></p>
+
+            <p>If you have any concerns, please reach out to the transport department.</p>
+        </div>
+
+        <div class="footer">This is an automated notification from the ATMS system.</div>
+    </div>
+</body>
+
+</html>
