@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BusArrived;
 use App\Models\Attendance;
 use App\Models\Bus;
 use App\Models\BusDriver;
@@ -17,6 +18,7 @@ use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class BusController extends Controller
 {
@@ -242,6 +244,42 @@ class BusController extends Controller
                 'longitude' => $request->longitude,
             ]);
 
+            // Find the nearest stop and send mail (BusDriver)
+            $nearestStop = $this->findNearestStop($request->latitude, $request->longitude, true);
+
+            if ($nearestStop) {
+                foreach ($nearestStop as $stop) {
+                    $stop = Stop::find($stop->id);
+                    if ($stop) {
+                        $users = $stop->users()->get();
+
+                        foreach ($users as $user) {
+                            Mail::to($user->email)->send(new BusArrived(
+                                $bus,
+                                $driver,
+                                $stop,
+                                $request->latitude,
+                                $request->longitude
+                            ));
+
+                            Log::info('Bus location update email sent', [
+                                'user_id' => $user->id,
+                                'bus_id' => $bus->id,
+                                'driver_id' => $driver->id,
+                                'stop_id' => $stop->id,
+                                'latitude' => $request->latitude,
+                                'longitude' => $request->longitude,
+                            ]);
+                        }
+                    }
+                }
+            } else {
+                Log::info('No nearest stop found for bus location update.', [
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
+                ]);
+            }
+
             return response()->json(['message' => 'Location updated successfully.']);
         } catch (\Exception $e) {
             return response()->json(
@@ -268,6 +306,7 @@ class BusController extends Controller
         $locations = BusLocation::with('bus')
             ->where('bus_id', $busId)
             ->orderBy('created_at', 'desc')
+            ->take(10)
             ->get();
 
         // Group locations by bus ID
@@ -375,7 +414,7 @@ class BusController extends Controller
         }
     }
 
-    public function findNearestStop($latitude, $longitude)
+    public function findNearestStop($latitude, $longitude, $isArray = false)
     {
         $minDistance = 0;  // Minimum distance in meters
         $maxDistance = 1500; // Maximum distance in meters
@@ -393,6 +432,10 @@ class BusController extends Controller
         ", [$latitude, $longitude, $latitude, $minDistance, $maxDistance]);
 
         if (!empty($nearestStop)) {
+            if ($isArray) {
+                return $nearestStop;
+            }
+
             return $nearestStop[0];
         }
 
