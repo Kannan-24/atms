@@ -9,9 +9,9 @@ class Stop extends Model
 {
     protected $fillable = ['stop_name', 'latitude', 'longitude', 'status'];
 
-    public function users(): HasMany
+    public function users()
     {
-        return $this->hasMany(UserStop::class);
+        return $this->hasManyThrough(User::class, Student::class, 'stop_id', 'id', 'id', 'user_id');
     }
 
     public function route()

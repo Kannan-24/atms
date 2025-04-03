@@ -253,11 +253,9 @@ class BusController extends Controller
                     foreach ($nearestStop as $stop) {
                         $stop = Stop::find($stop->id);
                         if ($stop) {
-                            $users = $stop->users()
-                                ->whereHas('bus', function ($query) use ($bus) {
-                                    $query->where('id', $bus->id);
-                                })
-                                ->get();
+                            $users = $stop->users();
+
+                            
 
                             if (!$users->isEmpty()) {
 
