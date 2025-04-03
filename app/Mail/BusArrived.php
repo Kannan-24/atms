@@ -40,8 +40,6 @@ class BusArrived extends Mailable
             view: 'emails.bus-arrived',
             with: [
                 'student_name' => $this->data['student_name'],
-                'student_class' => $this->data['student_class'],
-                'student_roll' => $this->data['student_roll'],
                 'bus_number' => $this->data['bus_number'],
                 'bus_driver' => $this->data['bus_driver'],
                 'bus_driver_phone' => $this->data['bus_driver_phone'],

@@ -250,36 +250,35 @@ class BusController extends Controller
             try {
 
                 if ($nearestStop) {
+                    $users = collect();
                     foreach ($nearestStop as $stop) {
                         $stop = Stop::find($stop->id);
-                        if ($stop) {
-                            $users = $stop->users;
-                            if (!$users->isEmpty()) {
-                                $busTmp = $bus->toArray();
+                        if ($stop && $stop->users) {
+                            $users = $stop->users->merge($users);
+                        }
+                    }
+                    if (!$users->isEmpty()) {
+                        $busTmp = $bus->toArray();
 
-                                foreach ($users as $user) {
-                                    
-                                    Mail::to($user->user->email)->send(new BusArrived([
-                                        'student_name' => $user->user->name,
-                                        'student_class' => $user->class,
-                                        'student_roll' => $user->roll_no,
-                                        'bus_number' => $busTmp['number'],
-                                        'bus_driver' => $driver->user->name,
-                                        'bus_driver_phone' => $driver->user->phone,
-                                        'faculty_name' => $bus->facultyIncharge->faculty->user->name ?? null,
-                                        'faculty_phone' => $bus->facultyIncharge->faculty->user->phone ?? null,
-                                    ]));
+                        foreach ($users as $user) {
 
-                                    Log::info('Bus location update email sent', [
-                                        'user_id' => $user->id,
-                                        'bus_id' => $bus->id,
-                                        'driver_id' => $driver->id,
-                                        'stop_id' => $stop->id,
-                                        'latitude' => $request->latitude,
-                                        'longitude' => $request->longitude,
-                                    ]);
-                                }
-                            }
+                            Mail::to($user->user->email)->send(new BusArrived([
+                                'student_name' => $user->user->name,
+                                'bus_number' => $busTmp['number'],
+                                'bus_driver' => $driver->user->name,
+                                'bus_driver_phone' => $driver->user->phone,
+                                'faculty_name' => $bus->facultyIncharge->faculty->user->name ?? null,
+                                'faculty_phone' => $bus->facultyIncharge->faculty->user->phone ?? null,
+                            ]));
+
+                            Log::info('Bus location update email sent', [
+                                'user_id' => $user->id,
+                                'bus_id' => $bus->id,
+                                'driver_id' => $driver->id,
+                                'stop_id' => $stop->id,
+                                'latitude' => $request->latitude,
+                                'longitude' => $request->longitude,
+                            ]);
                         }
                     }
                 } else {

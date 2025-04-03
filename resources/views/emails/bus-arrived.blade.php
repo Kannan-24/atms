@@ -54,8 +54,6 @@
             <p>The bus has arrived at the designated stop.</p>
             <div class="info-box">
                 <p><strong>Student Name:</strong> {{ $student_name }}</p>
-                <p><strong>Class:</strong> {{ $student_class }}</p>
-                <p><strong>Roll Number:</strong> {{ $student_roll }}</p>
                 <p><strong>Bus Number:</strong> {{ $bus_number }}</p>
                 <p><strong>Driver Name:</strong> {{ $bus_driver }}</p>
                 <p><strong>Driver Contact:</strong> {{ $bus_driver_phone }}</p>
