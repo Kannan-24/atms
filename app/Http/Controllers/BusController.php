@@ -254,15 +254,9 @@ class BusController extends Controller
                         $stop = Stop::find($stop->id);
                         if ($stop) {
                             $users = $stop->users;
-
-                            
-
                             if (!$users->isEmpty()) {
-
-
                                 $busTmp = $bus->toArray();
 
-                                
                                 foreach ($users as $user) {
                                     
                                     Mail::to($user->user->email)->send(new BusArrived([
