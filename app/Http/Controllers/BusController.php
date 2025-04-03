@@ -247,39 +247,49 @@ class BusController extends Controller
             // Find the nearest stop and send mail (BusDriver)
             $nearestStop = $this->findNearestStop($request->latitude, $request->longitude, true);
 
-            if ($nearestStop) {
-                foreach ($nearestStop as $stop) {
-                    $stop = Stop::find($stop->id);
-                    if ($stop) {
-                        $users = $stop->users()->get();
+            try {
 
-                        foreach ($users as $user) {
-                            Mail::to($user->email)->send(new BusArrived([
-                                'student_name' => $user->name,
-                                'student_class' => $user->class,
-                                'student_roll' => $user->roll_no,
-                                'bus_number' => $bus->number,
-                                'bus_driver' => $driver->name,
-                                'bus_driver_phone' => $driver->phone,
-                                'faculty_name' => $bus->facultyIncharge->faculty->name ?? null,
-                                'faculty_phone' => $bus->facultyIncharge->faculty->phone ?? null,
-                            ]));
+                if ($nearestStop) {
+                    foreach ($nearestStop as $stop) {
+                        $stop = Stop::find($stop->id);
+                        if ($stop) {
+                            $users = $stop->users()->get();
 
-                            Log::info('Bus location update email sent', [
-                                'user_id' => $user->id,
-                                'bus_id' => $bus->id,
-                                'driver_id' => $driver->id,
-                                'stop_id' => $stop->id,
-                                'latitude' => $request->latitude,
-                                'longitude' => $request->longitude,
-                            ]);
+                            $busTmp = $bus->toArray();
+                            foreach ($users as $user) {
+                                Mail::to($user->email)->send(new BusArrived([
+                                    'student_name' => $user->name,
+                                    'student_class' => $user->class,
+                                    'student_roll' => $user->roll_no,
+                                    'bus_number' => $busTmp['number'],
+                                    'bus_driver' => $driver->name,
+                                    'bus_driver_phone' => $driver->phone,
+                                    'faculty_name' => $bus->facultyIncharge->faculty->name ?? null,
+                                    'faculty_phone' => $bus->facultyIncharge->faculty->phone ?? null,
+                                ]));
+
+                                Log::info('Bus location update email sent', [
+                                    'user_id' => $user->id,
+                                    'bus_id' => $bus->id,
+                                    'driver_id' => $driver->id,
+                                    'stop_id' => $stop->id,
+                                    'latitude' => $request->latitude,
+                                    'longitude' => $request->longitude,
+                                ]);
+                            }
                         }
                     }
+                } else {
+                    Log::info('No nearest stop found for bus location update.', [
+                        'latitude' => $request->latitude,
+                        'longitude' => $request->longitude,
+                    ]);
                 }
-            } else {
-                Log::info('No nearest stop found for bus location update.', [
-                    'latitude' => $request->latitude,
-                    'longitude' => $request->longitude,
+            } catch (\Exception $e) {
+                Log::error('Error sending email', [
+                    'error' => $e->getMessage(),
+                    'bus_id' => $bus->id,
+                    'driver_id' => $driver->id,
                 ]);
             }
 
