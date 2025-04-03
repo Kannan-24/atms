@@ -253,7 +253,7 @@ class BusController extends Controller
                     foreach ($nearestStop as $stop) {
                         $stop = Stop::find($stop->id);
                         if ($stop) {
-                            $users = $stop->users();
+                            $users = $stop->users;
 
                             
 
@@ -261,16 +261,19 @@ class BusController extends Controller
 
 
                                 $busTmp = $bus->toArray();
+
+                                
                                 foreach ($users as $user) {
-                                    Mail::to($user->email)->send(new BusArrived([
-                                        'student_name' => $user->name,
+                                    
+                                    Mail::to($user->user->email)->send(new BusArrived([
+                                        'student_name' => $user->user->name,
                                         'student_class' => $user->class,
                                         'student_roll' => $user->roll_no,
                                         'bus_number' => $busTmp['number'],
-                                        'bus_driver' => $driver->name,
-                                        'bus_driver_phone' => $driver->phone,
-                                        'faculty_name' => $bus->facultyIncharge->faculty->name ?? null,
-                                        'faculty_phone' => $bus->facultyIncharge->faculty->phone ?? null,
+                                        'bus_driver' => $driver->user->name,
+                                        'bus_driver_phone' => $driver->user->phone,
+                                        'faculty_name' => $bus->facultyIncharge->faculty->user->name ?? null,
+                                        'faculty_phone' => $bus->facultyIncharge->faculty->user->phone ?? null,
                                     ]));
 
                                     Log::info('Bus location update email sent', [
