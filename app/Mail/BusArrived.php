@@ -27,7 +27,7 @@ class BusArrived extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Bus Arrived',
+            subject: 'Bus No: ' . $this->data['bus_number'] . ' has arrived close to you',
         );
     }
 

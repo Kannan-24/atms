@@ -254,13 +254,16 @@ class BusController extends Controller
                         $users = $stop->users()->get();
 
                         foreach ($users as $user) {
-                            Mail::to($user->email)->send(new BusArrived(
-                                $bus,
-                                $driver,
-                                $stop,
-                                $request->latitude,
-                                $request->longitude
-                            ));
+                            Mail::to($user->email)->send(new BusArrived([
+                                'student_name' => $user->name,
+                                'student_class' => $user->class,
+                                'student_roll' => $user->roll_no,
+                                'bus_number' => $bus->number,
+                                'bus_driver' => $driver->name,
+                                'bus_driver_phone' => $driver->phone,
+                                'faculty_name' => $bus->facultyIncharge->faculty->name ?? null,
+                                'faculty_phone' => $bus->facultyIncharge->faculty->phone ?? null,
+                            ]));
 
                             Log::info('Bus location update email sent', [
                                 'user_id' => $user->id,
